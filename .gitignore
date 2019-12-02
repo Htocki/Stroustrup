@@ -1,3 +1,9 @@
+## Windows
+.vs
+Chapter_9/build/out
+
+
+## Linux
 Chapter_9/build/CMakeFiles/
 Chapter_9/build/chapter_9
 Chapter_9/build/cmake_install.cmake
