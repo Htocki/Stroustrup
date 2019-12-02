@@ -1,15 +1,7 @@
 #pragma once
+#include "includes/Year.hpp"
+#include "includes/Month.hpp"
 #include <iostream>
-
-
-
-enum class Month {
-    jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec
-};
-
-enum class Day {
-    monday, tuesday, wednesday, thursday, friday, saturday, sunday
-};
 
 
 
@@ -17,16 +9,20 @@ class Date {
 public:
     class Invalid {};   // Used for exception.
 
-    Date(int y, int m, int d);  // Check and initialize the date.
-    
-    int month() { return m; }   // Inline.
-    int day()   { return d; }   // Inline.
-    int year()  { return y; }   // Inline.
 
-    friend std::ostream & operator << (std::ostream &out, const Date &d);
+    Date(Year y, Month m, int d);  // Check and initialize the date.
+    
+	Year year()		{ return y; }   // Inline.
+	Month month()	{ return m; }   // Inline.
+    int day()		{ return d; }   // Inline.
+
+    friend std::ostream& operator<<(std::ostream&, const Date&);
 
 public:
-    int y, m, d;
+	Year y;
+	Month m;
+	int d;
 
-    bool is_valid();    // If the date is correct, returns true. 
+    bool is_valid();    // If the date is correct, returns true.
+
 };
