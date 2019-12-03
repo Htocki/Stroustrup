@@ -7,10 +7,14 @@ set (PROJECT chapter_9)
 
 set (HEADERS
     ../includes/Date.hpp
+    ../includes/Year.hpp
+    ../includes/Month.hpp
     )
 
 set (SOURCES
     ../sources/Date.cpp
+    ../sources/Year.cpp
+    ../sources/Month.cpp
     ../sources/main.cpp
 )
 
