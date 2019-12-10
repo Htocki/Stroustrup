@@ -2,13 +2,29 @@
 #include <iostream>
 
 
-enum class Month {
-	jan = 1, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec
-};
+
+namespace Chrono
+{
+	enum class Month {
+		January = 1,
+		February,
+		March,
+		April,
+		May,
+		June,
+		July,
+		August,
+		September,
+		October,
+		November,
+		December
+	};
 
 
-Month int_to_month(int x); 
+	Month int_to_month(int);
 
-Month operator++(Month& m);
+	Month operator++(Month&);
 
-std::ostream& operator<<(std::ostream& os, Month m);
+	std::ostream& operator<<(std::ostream&, const Month&);
+	std::istream& operator>>(std::istream&, Month&);
+}

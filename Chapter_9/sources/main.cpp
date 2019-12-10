@@ -8,21 +8,18 @@
 
 int main() {
     try {
-        Date d {2009, Month::sep, 12};
-        std::cout << d << std::endl;
+		Chrono::Date today {1963, Chrono::Month::May, 19};
+		today.add_day(1);
+		Chrono::Date tomorrow = today;
+		std::cout << today << std::endl;
+		std::cout << tomorrow << std::endl;
     }
-    catch (Date::Invalid) {
+    catch (Chrono::Date::Invalid) {
         std::cerr << "Invalid date." << std::endl;
     }
-	catch (Year::Invalid) {
+	catch (Chrono::Year::Invalid) {
 		std::cerr << "Invalid year." << std::endl;
 	}
-
-	Month m = Month::sep;
-	++m;	// oct
-	++m;	// nov
-	++m;	// dec
-	++m;	// jan
 
 	pause();
 }

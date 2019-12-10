@@ -9,12 +9,14 @@ set (HEADERS
     includes/Date.hpp
     includes/Year.hpp
     includes/Month.hpp
+    includes/Day.hpp
     )
 
 set (SOURCES
     sources/Date.cpp
     sources/Year.cpp
     sources/Month.cpp
+    sources/Day.cpp
     sources/main.cpp
     )
 
