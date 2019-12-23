@@ -1,4 +1,4 @@
-#include "includes/Month.hpp"
+#include "Month.h"
 
 
 namespace Chrono
@@ -12,7 +12,7 @@ namespace Chrono
 	Month operator++(Month& m)
 	{
 		m = (m == Month::December)
-			? Month::January
+			? Month::January	
 			: Month(int(m) + 1);
 		return m;
 	}

@@ -1,5 +1,5 @@
-#include "includes/Date.hpp"
-#include "includes/Pause.hpp"
+#include "Date.h"
+#include "Pause.h"
 
 #include <iostream>
 
@@ -8,7 +8,7 @@
 
 int main() {
     try {
-		Chrono::Date today {1963, Chrono::Month::May, 19};
+		Chrono::Date today{1963, Chrono::Month::May, 19};
 		today.add_day(1);
 		Chrono::Date tomorrow = today;
 		std::cout << today << std::endl;

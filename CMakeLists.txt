@@ -4,4 +4,5 @@ set (PROJECT Straustrup)
 
 project (${PROJECT})
 
-add_subdirectory (Chapter_9)
+#add_subdirectory (Date)
+add_subdirectory (Pairs)
