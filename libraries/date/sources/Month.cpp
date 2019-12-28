@@ -6,9 +6,6 @@ namespace Chrono
 	Month::Month(Name name, Year year)
 		: _name(name)
 	{
-		if (year.leap()) { // Если год високосный
-			_name = 
-		}
 	}
 
 	Month int_to_month(int number) {
