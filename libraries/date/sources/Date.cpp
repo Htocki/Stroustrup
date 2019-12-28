@@ -18,6 +18,7 @@ namespace Chrono
         if (!is_valid()) throw Invalid{};
     }
 
+    /*
     void Date::add_day(int n) {
         for (int i(0); i < n; ++i)
             ++_day;
@@ -32,23 +33,26 @@ namespace Chrono
         for (int i(0); i < n; ++i)
             ++_year;
     }
+*/
 
     bool Date::is_valid() {
-        
+        return true;
     }
-
+/*
     std::istream& operator>>(std::istream& is, Date& d) {
         return is
             >> d._year >> "."
             >> d._month >> "."
             >> d._day;
     }
+*/
 
     const Date& default_date() {
-        static Date date(Year(2001), Month::January, Day(1));
+        static Date date(Year(2001), Month::Name::January, Day(1));
         return date;
     }
 
+/*
     std::ostream& operator<<(std::ostream& os, const Date& d) {
         return os
             << d.year() << "."
@@ -107,4 +111,5 @@ namespace Chrono
     Date& next_weekday(const Date& d) {
 
     }
+    */
 }

@@ -8,5 +8,5 @@ set (PROJECT Straustrup)
 project (${PROJECT})
 
 add_subdirectory (sources)
-add_subdirectory (libraries/googletest)
+add_subdirectory (external/googletest)
 add_subdirectory (libraries/date)

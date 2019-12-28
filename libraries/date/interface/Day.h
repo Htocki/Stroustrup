@@ -15,16 +15,16 @@ namespace Chrono
 		int number() const { return _number; }
 
 		// Учесть максимальное значение
-		Day& operator++();
+		// Day& operator++();
 
 
 	private:
 		int _number;
 
-		friend std::istream& operator>>(std::istream&, Day&);
+		// friend std::istream& operator>>(std::istream&, Day&);
 	};
 
-	std::ostream& operator<<(std::ostream&, const Day&);
-	bool operator==(const Day&, const Day&);
-	bool operator!=(const Day&, const Day&);
+	// std::ostream& operator<<(std::ostream&, const Day&);
+	// bool operator==(const Day&, const Day&);
+	// bool operator!=(const Day&, const Day&);
 }

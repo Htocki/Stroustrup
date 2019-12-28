@@ -19,9 +19,9 @@ namespace Chrono
         Month month() const { return _month; }
         Day day() const     { return _day; }
 
-        void add_day(int);
-        void add_month(int);
-        void add_year(int);
+        // void add_day(int);
+        // void add_month(int);
+        // void add_year(int);
 
 
     private:
