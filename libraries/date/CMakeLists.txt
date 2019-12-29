@@ -1,10 +1,15 @@
+cmake_minimum_required (VERSION 3.15)
+
+set (CMAKE_CXX_STANDARD 17)
+set (CMAKE_CXX_STANDARD_REQUIRED ON)
+
 set (BINARY Date)
 
-set (INTERFACE
-    interface/Date.h
-    interface/Year.h
-    interface/Month.h
-    interface/Day.h
+set (HEADERS
+    headers/Date.h
+    headers/Year.h
+    headers/Month.h
+    headers/Day.h
     )
 
 set (SOURCES
@@ -14,13 +19,12 @@ set (SOURCES
     sources/Day.cpp
     )
 
+set (LIBRARY_OUTPUT_DIRECTORY "Omrza")
+
 project (${BINARY})
 
-source_group ("Interface Files" FILES ${INTERFACE})
-source_group ("Source Files" FILES ${SOURCES})
+add_executable (${BINARY} ${HEADERS} ${SOURCES})
 
-add_executable (${BINARY} ${INTERFACE} ${SOURCES})
+include_directories (headers)
 
-include_directories (interface)
-
-add_library (${BINARY}_lib STATIC ${INTERFACE} ${SOURCES})
+add_library (${BINARY}_lib STATIC ${HEADERS} ${SOURCES})

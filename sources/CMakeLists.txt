@@ -1,5 +1,5 @@
-set (BINARY ${CMAKE_PROJECT_NAME})
-
 set (SOURCES main.cpp)
 
-add_executable (${BINARY}_run ${SOURCES})
+add_executable (${CMAKE_PROJECT_NAME} ${SOURCES})
+
+target_link_libraries (${CMAKE_PROJECT_NAME} PUBLIC Date_lib)
