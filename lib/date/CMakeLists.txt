@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 3.15)
 set (CMAKE_CXX_STANDARD 17)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set (BINARY Date)
+set (BINARY date)
 
 set (HEADERS
     headers/Date.h
@@ -19,7 +19,7 @@ set (SOURCES
     sources/Day.cpp
     )
 
-set (LIBRARY_OUTPUT_DIRECTORY "Omrza")
+include_directories("headers")
 
 project (${BINARY})
 

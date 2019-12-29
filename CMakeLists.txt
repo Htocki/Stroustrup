@@ -5,6 +5,6 @@ set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project (Straustrup)
 
-add_subdirectory (sources)
-add_subdirectory (external/googletest)
-add_subdirectory (libraries/date)
+add_subdirectory (src)
+add_subdirectory (lib/googletest)
+add_subdirectory (lib/date)
