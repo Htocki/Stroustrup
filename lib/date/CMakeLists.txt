@@ -17,4 +17,4 @@ project (${BINARY})
 
 include_directories (include)
 
-add_library (${BINARY}_lib STATIC ${INCLUDE} ${SOURCES})
+add_library (${BINARY} STATIC ${INCLUDE} ${SOURCES})

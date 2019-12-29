@@ -5,7 +5,7 @@ set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project (Straustrup)
 
-include_directories (src)
+include_directories (lib/date/include)
 
 add_subdirectory (src)
 add_subdirectory (lib/googletest)
