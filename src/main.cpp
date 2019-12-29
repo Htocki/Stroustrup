@@ -1,10 +1,11 @@
-#include "Date.h"
+#include "../lib/date/include/Date.h"
 #include <string>
 #include <iostream>
 
 
 int main() {
-	Date d;
+	Chrono::Date d;
+	d.print();
 	std::string s;
 	std::getline(std::cin, s);
 }

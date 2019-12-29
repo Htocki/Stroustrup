@@ -5,26 +5,16 @@ set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set (BINARY date)
 
-set (HEADERS
-    headers/Date.h
-    headers/Year.h
-    headers/Month.h
-    headers/Day.h
+set (INCLUDE
+    include/Date.h
     )
 
 set (SOURCES
     sources/Date.cpp
-    sources/Year.cpp
-    sources/Month.cpp
-    sources/Day.cpp
     )
-
-include_directories("headers")
 
 project (${BINARY})
 
-add_executable (${BINARY} ${HEADERS} ${SOURCES})
+include_directories (include)
 
-include_directories (headers)
-
-add_library (${BINARY}_lib STATIC ${HEADERS} ${SOURCES})
+add_library (${BINARY}_lib STATIC ${INCLUDE} ${SOURCES})
