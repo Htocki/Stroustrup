@@ -18,9 +18,15 @@ namespace Chrono
 
         void print();
 
+        friend std::ostream& operator<< (std::ostream&, const Date&);
+
     private:
         Year _year;
         Month _month;
         Day _day;
     };
+
+
+    // Secondary functions.
+    bool leap_year(int);
 }
