@@ -28,5 +28,5 @@ namespace Chrono
 
 
     // Secondary functions.
-    bool leap_year(int);
+    bool leapyear(int);
 }

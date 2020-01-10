@@ -26,7 +26,7 @@ namespace Chrono
 
 
     // Secondary functions.
-    bool leap_year(int number) {
+    bool leapyear(int number) {
         if (number % 4 == 0) {
             if (number % 100 == 0 && number % 400 != 0) return false;
             else return true;
