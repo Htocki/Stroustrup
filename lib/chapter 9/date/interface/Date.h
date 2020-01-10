@@ -11,6 +11,11 @@ namespace Chrono
     class Date {
     public:
         Date(Year, Month, Day);
+
+        Year year() { return _year; }
+        Month month() { return _month; }
+        Day day() { return _day; }
+
         void print();
 
     private:
