@@ -6,7 +6,7 @@ set (SOURCES
 
 project (Straustrup)
 
-include_directories ("lib/chapter 9/date/interface")
+include_directories ("lib/chapter 9/date/include")
 
 add_executable (${PROJECT_NAME} ${SOURCES})
 

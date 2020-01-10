@@ -1,24 +1,24 @@
 cmake_minimum_required (VERSION 3.15)
 
-set (INTERFACE
-    "interface/Date.h"
-    "interface/Year.h"
-    "interface/Month.h"
-    "interface/Day.h"
+set (INCLUDE
+    "include/Date.h"
+    "include/Year.h"
+    "include/Month.h"
+    "include/Day.h"
     )
 
-set (REALIZATION
-    "realization/Date.cpp"
-    "realization/Year.cpp"
-    "realization/Month.cpp"
-    "realization/Day.cpp"
+set (SOURCES
+    "src/Date.cpp"
+    "src/Year.cpp"
+    "src/Month.cpp"
+    "src/Day.cpp"
     )
 
 project (date)
 
-include_directories ("interface")
+include_directories ("include")
 
-add_library (${PROJECT_NAME} STATIC ${INTERFACE} ${REALIZATION})
+add_library (${PROJECT_NAME} STATIC ${INCLUDE} ${SOURCES})
 
 set_target_properties (${PROJECT_NAME}
 	PROPERTIES
