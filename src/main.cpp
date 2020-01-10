@@ -9,6 +9,9 @@ int main() {
 		Chrono::Date d(1220, 2, 23);
 		d.print();
 
+		Chrono::Date d0(1800, Month::March, 23);
+		d0.print();
+
 		std::cout << "Current data: "
 			<< d.year() << "."
 			<< d.month() << "."
@@ -44,7 +47,7 @@ int main() {
 	catch (...) {
 		std::cerr << "Unknown exception." << std::endl;
 	}
-
+	
 	std::string s;
 	std::getline(std::cin, s);
 }
