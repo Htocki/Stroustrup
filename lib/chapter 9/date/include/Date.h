@@ -10,6 +10,8 @@ namespace Chrono
 {
     class Date {
     public:
+        class Invalid {};
+
         Date(Year, Month, Day);
 
         Year year() { return _year; }
@@ -24,6 +26,8 @@ namespace Chrono
         Year _year;
         Month _month;
         Day _day;
+
+        bool is_valid();
     };
 
 

@@ -8,9 +8,10 @@ namespace Chrono
 	class Month {
 	public:
 		Month(int);
+		int number() { return _number; }
 		friend std::ostream& operator<< (std::ostream&, const Month&);
 
 	private:
-		int _month;
+		int _number;
 	};
 }
