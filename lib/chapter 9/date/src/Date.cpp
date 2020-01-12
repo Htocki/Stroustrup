@@ -4,6 +4,12 @@
 
 namespace Chrono
 {
+    Date::Date()
+        : _year(default_date().year())
+        , _month(default_date().month())
+        , _day(default_date().day())
+    {}
+
     Date::Date(Year year, Month month, Day day)
         : _year(year)
         , _month(month)
@@ -30,5 +36,10 @@ namespace Chrono
             else return true;
         }
         else return false;
+    }
+
+    const Date& default_date() {
+        static Date date(2001, 1, 1);
+        return date;
     }
 }

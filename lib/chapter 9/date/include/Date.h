@@ -10,11 +10,12 @@ namespace Chrono
 {
     class Date {
     public:
+        Date();
         Date(Year, Month, Day);
 
-        Year year() { return _year; }
-        Month month() { return _month; }
-        Day day() { return _day; }
+        Year year() const { return _year; }
+        Month month() const { return _month; }
+        Day day() const { return _day; }
 
         void print();
 
@@ -29,4 +30,5 @@ namespace Chrono
 
     // Secondary functions.
     bool leapyear(int);
+    const Date& default_date();
 }

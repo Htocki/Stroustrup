@@ -9,8 +9,11 @@ int main() {
 		Chrono::Date d(1820, 1, 23);
 		d.print();
 
-		Chrono::Date d0(1800, Month::March, 23);
-		d0.print();
+		Chrono::Date d01(1800, Month::March, 23);
+		d01.print();
+
+		Chrono::Date d02;
+		d02.print();
 
 		std::cout << "Current data: "
 			<< d.year() << "."
