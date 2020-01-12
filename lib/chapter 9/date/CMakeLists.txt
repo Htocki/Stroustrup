@@ -28,7 +28,7 @@ add_test (NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}_test)
 target_link_libraries (${PROJECT_NAME}_test PUBLIC ${PROJECT_NAME} gtest)
 
 add_library (${PROJECT_NAME} STATIC ${INCLUDE} ${SOURCES} ${TEST_SOURCES})
-
+ 
 
 set_target_properties (${PROJECT_NAME}
 	PROPERTIES

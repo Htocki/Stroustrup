@@ -6,7 +6,7 @@
 
 int main() {
 	try {
-		Chrono::Date d(1220, 2, 23);
+		Chrono::Date d(1820, 2, 23);
 		d.print();
 
 		Chrono::Date d0(1800, Month::March, 23);
@@ -17,19 +17,19 @@ int main() {
 			<< d.month() << "."
 			<< d.day() << std::endl;
 
-		Chrono::Date d1(1777, 1, 0);
+		Chrono::Date d1(2200, 1, 0);
 		std::cout
 			<< "Leap year [" << d1 << "]: "
 			<< Chrono::leapyear(d1.year().number())
 			<< std::endl;
 
-		Chrono::Date d2(1512, 2, 0);
+		Chrono::Date d2(1912, 2, 0);
 		std::cout
 			<< "Leap year [" << d2 << "]: "
 			<< Chrono::leapyear(d2.year().number())
 			<< std::endl;
 
-		Chrono::Date d3(1100, 3, 0);
+		Chrono::Date d3(1900, 3, 0);
 		std::cout
 			<< "Leap year [" << d3 << "]: "
 			<< Chrono::leapyear(d3.year().number())
@@ -43,6 +43,9 @@ int main() {
 	}
 	catch (Chrono::Date::Invalid) {
 		std::cerr << "Exception: Date is incorrect." << std::endl;
+	}
+	catch (Chrono::Year::Invalid) {
+		std::cerr << "Exception: Year is incorrect." << std::endl;
 	}
 	catch (...) {
 		std::cerr << "Unknown exception." << std::endl;
