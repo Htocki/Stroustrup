@@ -8,9 +8,7 @@ namespace Chrono
         : _year(year)
         , _month(month)
         , _day(day)
-    {
-        if (!is_valid()) throw Invalid{};
-    }
+    {}
 
     void Date::print() {
         std::cout
@@ -24,15 +22,6 @@ namespace Chrono
         os << date._year << "." << date._month << "." << date._day;
         return os;
     }
-
-    bool Date::is_valid() {
-        if (_month.number() < 1 || _month.number() > 12) 
-            return false;
-        else 
-            return true;
-    }
-
-
 
     // Secondary functions.
     bool leapyear(int number) {

@@ -10,7 +10,7 @@ namespace Chrono
 		static constexpr int _max = 2200;
 
 	public:
-		class Invalid{};
+		class Invalid {};
 
 		Year(int);
 		int number() { return _number; }

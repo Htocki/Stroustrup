@@ -23,7 +23,12 @@ enum class Month {
 namespace Chrono
 {
 	class Month {
+		static constexpr int _min = 1;
+		static constexpr int _max = 12;
+
 	public:
+		class Invalid {};
+
 		Month(int);
 		Month(::Month);
 		int number() { return _number; }
@@ -31,5 +36,7 @@ namespace Chrono
 
 	private:
 		int _number;
+
+		bool is_valid();
 	};
 }
