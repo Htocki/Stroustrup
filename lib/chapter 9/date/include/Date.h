@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 #include "Year.h"
 #include "Month.h"
 #include "Day.h"
@@ -27,8 +28,8 @@ namespace Chrono
         Day _day;
     };
 
-
     // Secondary functions.
     bool leapyear(Year);
     const Date& default_date();
+    int number_of_days(Year, Month);
 }

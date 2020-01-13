@@ -13,7 +13,7 @@ namespace Chrono
     Date::Date(Year year, Month month, Day day)
         : _year(year)
         , _month(month)
-        , _day(day)
+        , _day(day.number(), number_of_days(year, month))
     {}
 
     void Date::print() {
@@ -41,5 +41,15 @@ namespace Chrono
     const Date& default_date() {
         static Date date(2001, 1, 1);
         return date;
+    }
+
+    int number_of_days(Year year, Month month) {
+        std::vector<int> numbers { 
+            31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30 ,31 
+        };
+
+        if (leapyear(year)) numbers[1] = 29;
+
+        return numbers.at(month.number() - 1);
     }
 }

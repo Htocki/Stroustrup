@@ -6,11 +6,20 @@
 namespace Chrono
 {
 	class Day {
+		static constexpr int _min = 1;
+		int _max = 0;
+
 	public:
-		Day(int);
+		class Invalid {};
+
+		Day(int);	// Intermediate constructor.
+		Day(int, int);
+		int number() const { return _number; }
 		friend std::ostream& operator<< (std::ostream&, const Day&);
 
 	private:
-		int _day;
+		int _number;
+
+		bool is_valid();
 	};
 }

@@ -20,35 +20,38 @@ int main() {
 			<< d.month() << "."
 			<< d.day() << std::endl;
 
-		Chrono::Date d1(2200, 12, 0);
+		Chrono::Date d1(2200, 2, 28);
 		std::cout
 			<< "Leap year [" << d1 << "]: "
 			<< Chrono::leapyear(d1.year().number())
 			<< std::endl;
 
-		Chrono::Date d2(1912, 11, 0);
+		Chrono::Date d2(1912, 3, 29);
 		std::cout
 			<< "Leap year [" << d2 << "]: "
 			<< Chrono::leapyear(d2.year().number())
 			<< std::endl;
 
-		Chrono::Date d3(1900, 3, 0);
+		Chrono::Date d3(1900, 2, 28);
 		std::cout
 			<< "Leap year [" << d3 << "]: "
 			<< Chrono::leapyear(d3.year().number())
 			<< std::endl;
 
-		Chrono::Date d4(2000, 4, 0);
+		Chrono::Date d4(2000, 2, 29);
 		std::cout
 			<< "Leap year [" << d4 << "]: "
 			<< Chrono::leapyear(d4.year().number())
 			<< std::endl;
 	}
 	catch (Chrono::Year::Invalid) {
-		std::cerr << "Exception: Year is incorrect." << std::endl;
+		std::cerr << "Exception: year is incorrect." << std::endl;
 	}
 	catch (Chrono::Month::Invalid) {
-		std::cerr << "Exception: Month is incorrect." << std::endl;
+		std::cerr << "Exception: month is incorrect." << std::endl;
+	}
+	catch (Chrono::Day::Invalid) {
+		std::cerr << "Exception: day is incorrect." << std::endl;
 	}
 	catch (...) {
 		std::cerr << "Unknown exception." << std::endl;
