@@ -29,6 +29,6 @@ namespace Chrono
 
 
     // Secondary functions.
-    bool leapyear(int);
+    bool leapyear(Year);
     const Date& default_date();
 }

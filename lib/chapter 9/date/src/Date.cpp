@@ -30,9 +30,9 @@ namespace Chrono
     }
 
     // Secondary functions.
-    bool leapyear(int number) {
-        if (number % 4 == 0) {
-            if (number % 100 == 0 && number % 400 != 0) return false;
+    bool leapyear(Year year) {
+        if (year.number() % 4 == 0) {
+            if (year.number() % 100 == 0 && year.number() % 400 != 0) return false;
             else return true;
         }
         else return false;
