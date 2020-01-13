@@ -10,7 +10,7 @@ namespace Chrono
 		if (!is_valid()) throw Invalid{};
 	}
 
-	std::ostream& operator<< (std::ostream& os, const Year& year) {
+	std::ostream& operator<<(std::ostream& os, const Year& year) {
 		os << year._number;
 		return os;
 	}

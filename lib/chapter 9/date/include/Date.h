@@ -20,7 +20,7 @@ namespace Chrono
 
         void print();
 
-        friend std::ostream& operator<< (std::ostream&, const Date&);
+        friend std::ostream& operator<<(std::ostream&, const Date&);
 
     private:
         Year _year;
@@ -31,5 +31,5 @@ namespace Chrono
     // Secondary functions.
     bool leapyear(Year);
     const Date& default_date();
-    int number_of_days(Year, Month);
+    int number_of_days(Year, Month);    // Need to rename.
 }

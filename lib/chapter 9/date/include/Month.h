@@ -32,7 +32,7 @@ namespace Chrono
 		Month(int);
 		Month(::Month);
 		int number() const { return _number; }
-		friend std::ostream& operator<< (std::ostream&, const Month&);
+		friend std::ostream& operator<<(std::ostream&, const Month&);
 
 	private:
 		int _number;

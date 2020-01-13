@@ -24,7 +24,7 @@ namespace Chrono
             << "]" << std::endl;
     }
 
-    std::ostream& operator<< (std::ostream& os, const Date& date) {
+    std::ostream& operator<<(std::ostream& os, const Date& date) {
         os << date._year << "." << date._month << "." << date._day;
         return os;
     }

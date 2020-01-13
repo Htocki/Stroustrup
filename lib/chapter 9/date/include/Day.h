@@ -15,7 +15,7 @@ namespace Chrono
 		Day(int);	// Intermediate constructor.
 		Day(int, int);
 		int number() const { return _number; }
-		friend std::ostream& operator<< (std::ostream&, const Day&);
+		friend std::ostream& operator<<(std::ostream&, const Day&);
 
 	private:
 		int _number;
