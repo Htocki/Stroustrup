@@ -13,7 +13,7 @@ namespace Chrono
     Date::Date(Year year, Month month, Day day)
         : _year(year)
         , _month(month)
-        , _day(day.number(), number_of_days(year, month))
+        , _day(day.number(), days_in_month(year, month))
     {}
 
     void Date::print() {
@@ -43,7 +43,7 @@ namespace Chrono
         return date;
     }
 
-    int number_of_days(Year year, Month month) {
+    int days_in_month(Year year, Month month) {
         std::vector<int> numbers { 
             31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30 ,31 
         };

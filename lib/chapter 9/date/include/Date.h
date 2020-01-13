@@ -31,5 +31,5 @@ namespace Chrono
     // Secondary functions.
     bool leapyear(Year);
     const Date& default_date();
-    int number_of_days(Year, Month);    // Need to rename.
+    int days_in_month(Year, Month);
 }
