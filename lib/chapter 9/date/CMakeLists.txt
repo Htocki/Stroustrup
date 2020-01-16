@@ -20,11 +20,13 @@ set (SOURCES
 
 project (date)
 
-add_executable (${PROJECT_NAME}_test ${TEST_SOURCES})
-add_test (NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}_test)
-target_link_libraries (${PROJECT_NAME}_test PUBLIC ${PROJECT_NAME} gtest)
-
-add_library (${PROJECT_NAME} STATIC ${INCLUDE} ${SOURCES} ${TEST_SOURCES})
+# Library.
+add_library (${PROJECT_NAME} 
+    STATIC 
+        ${INCLUDE} 
+        ${SOURCES} 
+        ${TEST_SOURCES}
+    )
 
 set_target_properties (${PROJECT_NAME}
 	PROPERTIES
@@ -38,7 +40,16 @@ target_include_directories (${PROJECT_NAME}
         "../../googletest/googletest/include"
     )
 
-target_include_directories (${PROJECT_NAME}_test 
+# Test for the library.
+set (TEST_NAME ${PROJECT_NAME}-test)
+
+add_executable (${TEST_NAME} ${TEST_SOURCES})
+
+add_test (NAME ${TEST_NAME} COMMAND ${TEST_NAME})
+
+target_link_libraries (${TEST_NAME} PUBLIC ${PROJECT_NAME} gtest)
+
+target_include_directories (${TEST_NAME} 
     PRIVATE
         "include"
         "../../googletest/googletest/include"
