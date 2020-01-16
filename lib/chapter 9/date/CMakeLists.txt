@@ -20,18 +20,26 @@ set (SOURCES
 
 project (date)
 
-include_directories ("include")
-include_directories ("../../googletest/googletest/include")
-
 add_executable (${PROJECT_NAME}_test ${TEST_SOURCES})
 add_test (NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}_test)
 target_link_libraries (${PROJECT_NAME}_test PUBLIC ${PROJECT_NAME} gtest)
 
 add_library (${PROJECT_NAME} STATIC ${INCLUDE} ${SOURCES} ${TEST_SOURCES})
- 
 
 set_target_properties (${PROJECT_NAME}
 	PROPERTIES
 		set (CMAKE_CXX_STANDARD 17)
 		set (CMAKE_CXX_STANDARD_REQUIRED ON)
 	)
+
+target_include_directories (${PROJECT_NAME} 
+    PRIVATE
+        "include"
+        "../../googletest/googletest/include"
+    )
+
+target_include_directories (${PROJECT_NAME}_test 
+    PRIVATE
+        "include"
+        "../../googletest/googletest/include"
+    )
