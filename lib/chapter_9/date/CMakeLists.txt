@@ -51,6 +51,6 @@ target_link_libraries (${TEST_NAME} PUBLIC ${PROJECT_NAME} gtest)
 
 target_include_directories (${TEST_NAME} 
     PRIVATE
-        "include"
-        "../../googletest/googletest/include"
+       "include"
+       "../../googletest/googletest/include"
     )
