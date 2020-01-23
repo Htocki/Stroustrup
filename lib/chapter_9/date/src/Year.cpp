@@ -5,20 +5,19 @@
 namespace Chrono
 {
 	Year::Year(int number)
-		: _number(number)
+		: number(number)
 	{
-		if (!is_valid()) throw Invalid{};
+		if (number < min || number > max) throw Invalid{};
+	}
+
+	Year& Year::operator++() {
+		if (number == max) throw Invalid{};
+		else ++number;
+		return *this;
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Year& year) {
-		os << year._number;
+		os << year.number;
 		return os;
-	}
-
-	bool Year::is_valid() {
-		if (_number < _min || _number > _max) 
-			return false;
-		else 
-			return true;
 	}
 }

@@ -18,6 +18,10 @@ namespace Chrono
         Month month() const { return _month; }
         Day day() const { return _day; }
 
+        void add_year(int);
+        void add_month(int);
+        void add_day(int);
+
         void print();
 
         friend std::ostream& operator<<(std::ostream&, const Date&);
@@ -31,5 +35,6 @@ namespace Chrono
     // Secondary functions.
     bool leapyear(Year);
     const Date& default_date();
+    int days_in_year(Year);
     int days_in_month(Year, Month);
 }

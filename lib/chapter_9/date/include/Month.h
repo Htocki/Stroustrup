@@ -23,20 +23,22 @@ enum class Month {
 namespace Chrono
 {
 	class Month {
-		static constexpr int _min = 1;
-		static constexpr int _max = 12;
+		static constexpr int min = 1;
+		static constexpr int max = 12;
 
 	public:
 		class Invalid {};
 
 		Month(int);
 		Month(::Month);
-		int number() const { return _number; }
+
+		int getNumber() const { return number; }
+
+		Month& operator++();
+		
 		friend std::ostream& operator<<(std::ostream&, const Month&);
 
 	private:
-		int _number;
-
-		bool is_valid();
+		int number;
 	};
 }

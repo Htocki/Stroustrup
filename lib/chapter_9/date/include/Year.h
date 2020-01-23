@@ -6,19 +6,21 @@
 namespace Chrono 
 {
 	class Year {
-		static constexpr int _min = 0;
-		static constexpr int _max = 10000;
+		static constexpr int min = 1800;
+		static constexpr int max = 2200;
 
 	public:
 		class Invalid {};
 
 		Year(int);
-		int number() const { return _number; }
+
+		int getNumber() const { return number; }
+
+		Year& operator++();
+
 		friend std::ostream& operator<<(std::ostream&, const Year&);
 
 	private:
-		int _number;
-
-		bool is_valid();
+		int number;
 	};
 }

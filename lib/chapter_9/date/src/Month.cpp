@@ -5,25 +5,23 @@
 namespace Chrono
 {
 	Month::Month(int number)
-		: _number(number)
+		: number(number)
 	{
-		if (!is_valid()) throw Invalid{};
+		if (number < min || number > max) throw Invalid{};
+	}
+
+	Month& Month::operator++() {
+		if (number == max) number = min;
+		else ++number;
+		return *this;
 	}
 
 	Month::Month(::Month name)
-		: _number(static_cast<int>(name))
+		: number(static_cast<int>(name))
 	{}
 
-	std::ostream& operator<< (std::ostream& os, const Month& month) {
-		os << month._number;
+	std::ostream& operator<<(std::ostream& os, const Month& month) {
+		os << month.number;
 		return os;
-	}
-
-	bool Month::is_valid()
-	{
-		if (_number < _min || _number > _max)
-			return false;
-		else
-			return true;
 	}
 }

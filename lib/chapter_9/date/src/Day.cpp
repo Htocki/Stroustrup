@@ -6,25 +6,24 @@ namespace Chrono
 {
 	// Intermediate constructor.
 	Day::Day(int number)
-		: _number(number)
+		: number(number)
 	{}
 
-	Day::Day(int number, int max = 0)
-		: _number(number)
-		, _max(max)
+	Day::Day(int number, int max)
+		: number(number)
+		, max(max)
 	{
-		if (!is_valid()) throw Invalid{};
+		if (number < min || number > max) throw Invalid{};
 	}
 
-	bool Day::is_valid() {
-		if (_number < _min || _number > _max)
-			return false;
-		else
-			return true;
+	Day& Day::operator++() {
+		if (number == max) number = min;
+		else ++number;
+		return *this;
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Day& day) {
-		os << day._number;
+		os << day.number;
 		return os;
 	}
 }

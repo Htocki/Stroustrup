@@ -23,26 +23,53 @@ int main() {
 		Chrono::Date d1(2200, 2, 28);
 		std::cout
 			<< "Leap year [" << d1 << "]: "
-			<< Chrono::leapyear(d1.year().number())
+			<< Chrono::leapyear(d1.year().getNumber())
 			<< std::endl;
 
 		Chrono::Date d2(1912, 3, 29);
 		std::cout
 			<< "Leap year [" << d2 << "]: "
-			<< Chrono::leapyear(d2.year().number())
+			<< Chrono::leapyear(d2.year().getNumber())
 			<< std::endl;
 
 		Chrono::Date d3(1900, 2, 28);
 		std::cout
 			<< "Leap year [" << d3 << "]: "
-			<< Chrono::leapyear(d3.year().number())
+			<< Chrono::leapyear(d3.year().getNumber())
 			<< std::endl;
 
 		Chrono::Date d4(2000, 2, 29);
 		std::cout
 			<< "Leap year [" << d4 << "]: "
-			<< Chrono::leapyear(d4.year().number())
+			<< Chrono::leapyear(d4.year().getNumber())
 			<< std::endl;
+
+		Chrono::Date addDate(2020, 1, 17);
+		addDate.print();
+
+		addDate.add_year(5);
+		addDate.print();
+
+		addDate.add_month(14);
+		addDate.print();
+
+		addDate.add_day(365);
+		addDate.print();
+
+		addDate.add_day(366);
+		addDate.print();
+
+		addDate.add_day(17);
+		addDate.print();
+
+		addDate.add_day(366);
+		addDate.print();
+
+		addDate.add_day(366);
+		addDate.print();
+
+		addDate.add_day(366);
+		addDate.print();
 	}
 	catch (Chrono::Year::Invalid) {
 		std::cerr << "Exception: year is incorrect." << std::endl;
