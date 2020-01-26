@@ -81,6 +81,13 @@ int main() {
 		eq2.print();
 		std::cout << "Equality operator: " << (eq1 == eq2) << std::endl;
 		std::cout << "Inequality operator: " << (eq1 != eq2) << std::endl;
+
+
+		std::cout << std::endl << std::endl;
+		std::cout << "Entering date..." << std::endl;
+		Chrono::Date inputDate;
+		std::cin >> inputDate;
+		inputDate.print();
 	}
 	catch (Chrono::Year::Invalid) {
 		std::cerr << "Exception: year is incorrect." << std::endl;

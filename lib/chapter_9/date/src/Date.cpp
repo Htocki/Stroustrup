@@ -70,6 +70,13 @@ namespace Chrono
         return os;
     }
 
+    std::istream& operator>>(std::istream& is, Date& date) {
+        Date fakeDate;
+        is >> fakeDate._year >> fakeDate._month >> fakeDate._day;
+        date = fakeDate;
+        return is;
+    }
+
     bool operator==(const Date& left, const Date& right) {
         if (left.day() == right.day() &&
             left.month() == right.month() &&

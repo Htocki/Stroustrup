@@ -22,8 +22,11 @@ namespace Chrono
 		Day& operator++();
 
 		friend std::ostream& operator<<(std::ostream&, const Day&);
+		friend std::istream& operator>>(std::istream&, Day&);
 
 	private:
+		bool is_valid();
+
 		int number;
 	};
 

@@ -7,7 +7,7 @@ namespace Chrono
 	Month::Month(int number)
 		: number(number)
 	{
-		if (number < min || number > max) throw Invalid{};
+		if (!is_valid()) throw Invalid{};
 	}
 
 	Month& Month::operator++() {
@@ -23,6 +23,18 @@ namespace Chrono
 	std::ostream& operator<<(std::ostream& os, const Month& month) {
 		os << month.number;
 		return os;
+	}
+
+	std::istream& operator>>(std::istream& is, Month& month) {
+		std::cout << "Input month number: ";
+		is >> month.number;
+		if (!month.is_valid()) throw Month::Invalid{};
+		return is;
+	}
+
+	bool Month::is_valid() {
+		if (number < min || number > max) return false;
+		else return true;
 	}
 
 	bool operator==(const Month& left, const Month& right) {

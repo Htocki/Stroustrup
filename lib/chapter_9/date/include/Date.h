@@ -25,6 +25,7 @@ namespace Chrono
         void print();
 
         friend std::ostream& operator<<(std::ostream&, const Date&);
+        friend std::istream& operator>>(std::istream&, Date&);
 
     private:
         Year _year;

@@ -13,7 +13,7 @@ namespace Chrono
 		: number(number)
 		, max(max)
 	{
-		if (number < min || number > max) throw Invalid{};
+		if (!is_valid()) throw Invalid{};
 	}
 
 	Day& Day::operator++() {
@@ -27,9 +27,21 @@ namespace Chrono
 		return os;
 	}
 
+	std::istream& operator>>(std::istream& is, Day& day) {
+		std::cout << "Input day number: ";
+		is >> day.number;
+		if (!day.is_valid()) throw Day::Invalid{};
+		return is;
+	}
+
+	bool Day::is_valid() {
+		if (number < min || number > max) return false;
+		else return true;
+	}
+
 	bool operator==(const Day& left, const Day& right) {
 		if (left.getNumber() == right.getNumber()) return true;
-		else false;
+		else return false;
 	}
 
 	bool operator!=(const Day& left, const Day& right) {
