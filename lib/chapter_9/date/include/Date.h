@@ -32,9 +32,11 @@ namespace Chrono
         Day _day;
     };
 
-    // Secondary functions.
+    bool operator==(const Date&, const Date&);
+    bool operator!=(const Date&, const Date&);
     bool leapyear(Year);
     const Date& default_date();
     int days_in_year(Year);
     int days_in_month(Year, Month);
+    
 }

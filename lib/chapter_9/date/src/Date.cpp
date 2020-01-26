@@ -49,7 +49,8 @@ namespace Chrono
             if (fakeDate.day().getNumber() == 1) {
                 fakeDate.add_month(1);
                 fakeDate._day.setMax(
-                    days_in_month(fakeDate.year(), fakeDate.month()));
+                    days_in_month(fakeDate.year(), fakeDate.month())
+                );
             }
         }
 
@@ -69,7 +70,20 @@ namespace Chrono
         return os;
     }
 
-    // Secondary functions.
+    bool operator==(const Date& left, const Date& right) {
+        if (left.day() == right.day() &&
+            left.month() == right.month() &&
+            left.year() == right.year())
+            return true;
+        else
+            return false;
+    }
+
+    bool operator!=(const Date& left, const Date& right) {
+        return !operator==(left, right);
+    }
+
+
     bool leapyear(Year year) {
         if (year.getNumber() % 4 == 0) {
             if (year.getNumber() % 100 == 0 && year.getNumber() % 400 != 0) 

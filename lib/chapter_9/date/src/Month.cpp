@@ -24,4 +24,13 @@ namespace Chrono
 		os << month.number;
 		return os;
 	}
+
+	bool operator==(const Month& left, const Month& right) {
+		if (left.getNumber() == right.getNumber()) return true;
+		else return false;
+	}
+
+	bool operator!=(const Month& left, const Month& right) {
+		return !operator==(left, right);
+	}
 }

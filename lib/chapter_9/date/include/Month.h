@@ -41,4 +41,7 @@ namespace Chrono
 	private:
 		int number;
 	};
+
+	bool operator==(const Month&, const Month&);
+	bool operator!=(const Month&, const Month&);
 }

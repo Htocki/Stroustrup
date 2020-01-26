@@ -26,4 +26,13 @@ namespace Chrono
 		os << day.number;
 		return os;
 	}
+
+	bool operator==(const Day& left, const Day& right) {
+		if (left.getNumber() == right.getNumber()) return true;
+		else false;
+	}
+
+	bool operator!=(const Day& left, const Day& right) {
+		return !operator==(left, right);
+	}
 }

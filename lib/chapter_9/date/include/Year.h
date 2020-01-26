@@ -23,4 +23,7 @@ namespace Chrono
 	private:
 		int number;
 	};
+
+	bool operator==(const Year&, const Year&);
+	bool operator!=(const Year&, const Year&);
 }

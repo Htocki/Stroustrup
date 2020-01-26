@@ -44,6 +44,9 @@ int main() {
 			<< Chrono::leapyear(d4.year().getNumber())
 			<< std::endl;
 
+
+		std::cout << std::endl << std::endl;
+
 		Chrono::Date addDate(2020, 1, 17);
 		addDate.print();
 
@@ -70,6 +73,14 @@ int main() {
 
 		addDate.add_day(366);
 		addDate.print();
+
+
+		std::cout << std::endl << std::endl;
+		Chrono::Date eq1, eq2;
+		eq1.print();
+		eq2.print();
+		std::cout << "Equality operator: " << (eq1 == eq2) << std::endl;
+		std::cout << "Inequality operator: " << (eq1 != eq2) << std::endl;
 	}
 	catch (Chrono::Year::Invalid) {
 		std::cerr << "Exception: year is incorrect." << std::endl;

@@ -20,4 +20,13 @@ namespace Chrono
 		os << year.number;
 		return os;
 	}
+
+	bool operator==(const Year& left, const Year& right) {
+		if (left.getNumber() == right.getNumber()) return true;
+		else return false;
+	}
+
+	bool operator!=(const Year& left, const Year& right) {
+		return !operator==(left, right);
+	}
 }

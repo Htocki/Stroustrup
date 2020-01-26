@@ -26,4 +26,7 @@ namespace Chrono
 	private:
 		int number;
 	};
+
+	bool operator==(const Day&, const Day&);
+	bool operator!=(const Day&, const Day&);
 }
