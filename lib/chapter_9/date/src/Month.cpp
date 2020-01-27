@@ -16,7 +16,7 @@ namespace Chrono
 		return *this;
 	}
 
-	Month::Month(::Month name)
+	Month::Month(Month::Name name)
 		: number(static_cast<int>(name))
 	{}
 

@@ -121,7 +121,7 @@ namespace Chrono
         return months.at(month.getNumber() - 1);
     }
 
-    ::Day day_of_week(const Date& date) {
+    Day::Name day_of_week(const Date& date) {
         int day = date.getDay().getNumber();
         int month = date.getMonth().getNumber();
         int year = date.getYear().getNumber();
@@ -133,7 +133,7 @@ namespace Chrono
         else
             month -= 2u;
 
-        return static_cast<::Day>(
+        return static_cast<Day::Name>(
             (day + 31u * month / 12u + year + year / 4u - year / 100u
                 + year / 400u) % 7u
             );
@@ -142,15 +142,15 @@ namespace Chrono
     Date next_sunday(const Date& date) {
         Date fakeDate(date);
         do fakeDate.add_day(1);
-        while (day_of_week(fakeDate) != ::Day::Sunday);
+        while (day_of_week(fakeDate) != Day::Name::Sunday);
         return fakeDate;
     }
 
     Date next_weekday(const Date& date) {
         Date fakeDate(date);
         do fakeDate.add_day(1);
-        while (day_of_week(fakeDate) == ::Day::Saturday
-            || day_of_week(fakeDate) == ::Day::Sunday);
+        while (day_of_week(fakeDate) == Day::Name::Saturday
+            || day_of_week(fakeDate) == Day::Name::Sunday);
         return fakeDate;
     }
 }

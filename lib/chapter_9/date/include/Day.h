@@ -3,21 +3,21 @@
 
 
 
-enum class Day {
-	Sunday,
-	Monday,
-	Tuesday,
-	Wednesday,
-	Thursday,
-	Friday,
-	Saturday
-};
-
-
-
 namespace Chrono
 {
 	class Day {
+	public:
+		enum class Name {
+			Sunday,
+			Monday,
+			Tuesday,
+			Wednesday,
+			Thursday,
+			Friday,
+			Saturday
+		};
+
+	private:
 		static constexpr int min = 1;
 		int max = 0;
 

@@ -3,26 +3,26 @@
 
 
 
-enum class Month {
-	January = 1,
-	February,
-	March,
-	April,
-	May,
-	June,
-	July,
-	August,
-	September,
-	October,
-	November,
-	December
-};
-
-
-
 namespace Chrono
 {
 	class Month {
+	public:
+		enum class Name {
+			January = 1,
+			February,
+			March,
+			April,
+			May,
+			June,
+			July,
+			August,
+			September,
+			October,
+			November,
+			December
+		};
+
+	private:
 		static constexpr int min = 1;
 		static constexpr int max = 12;
 
@@ -30,7 +30,7 @@ namespace Chrono
 		class Invalid {};
 
 		Month(int);
-		Month(::Month);
+		Month(Month::Name);
 
 		int getNumber() const { return number; }
 

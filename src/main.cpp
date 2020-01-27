@@ -4,45 +4,25 @@
 
 
 
+using namespace Chrono;
+
+
+
 int main() {
 	try {
-		Chrono::Date d(1820, 1, 23);
+		Date d(1820, 1, 23);
 		d.print();
 
-		Chrono::Date d01(1800, Month::March, 23);
+		Date d01(1800, Month::Name::March, 23);
 		d01.print();
 
-		Chrono::Date d02;
+		Date d02;
 		d02.print();
 
 		std::cout << "Current data: "
 			<< d.getYear() << "."
 			<< d.getMonth() << "."
 			<< d.getDay() << std::endl;
-
-		Chrono::Date d1(2200, 2, 28);
-		std::cout
-			<< "Leap year [" << d1 << "]: "
-			<< Chrono::leapyear(d1.getYear().getNumber())
-			<< std::endl;
-
-		Chrono::Date d2(1912, 3, 29);
-		std::cout
-			<< "Leap year [" << d2 << "]: "
-			<< Chrono::leapyear(d2.getYear().getNumber())
-			<< std::endl;
-
-		Chrono::Date d3(1900, 2, 28);
-		std::cout
-			<< "Leap year [" << d3 << "]: "
-			<< Chrono::leapyear(d3.getYear().getNumber())
-			<< std::endl;
-
-		Chrono::Date d4(2000, 2, 29);
-		std::cout
-			<< "Leap year [" << d4 << "]: "
-			<< Chrono::leapyear(d4.getYear().getNumber())
-			<< std::endl;
 
 
 		std::cout << std::endl << std::endl;
@@ -76,7 +56,7 @@ int main() {
 
 
 		std::cout << std::endl << std::endl;
-		Chrono::Date eq1, eq2;
+		Date eq1, eq2;
 		eq1.print();
 		eq2.print();
 		std::cout << "Equality operator: " << (eq1 == eq2) << std::endl;
@@ -85,18 +65,18 @@ int main() {
 
 		std::cout << std::endl << std::endl;
 		std::cout << "Entering date..." << std::endl;
-		Chrono::Date inputDate;
+		Date inputDate;
 		std::cin >> inputDate;
 		inputDate.print();
 
 	}
-	catch (Chrono::Year::Invalid) {
+	catch (Year::Invalid) {
 		std::cerr << "Exception: year is incorrect." << std::endl;
 	}
-	catch (Chrono::Month::Invalid) {
+	catch (Month::Invalid) {
 		std::cerr << "Exception: month is incorrect." << std::endl;
 	}
-	catch (Chrono::Day::Invalid) {
+	catch (Day::Invalid) {
 		std::cerr << "Exception: day is incorrect." << std::endl;
 	}
 	catch (...) {
