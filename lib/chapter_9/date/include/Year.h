@@ -18,14 +18,13 @@ namespace Chrono
 
 		Year& operator++();
 
-		friend std::ostream& operator<<(std::ostream&, const Year&);
-
 	private:
 		bool is_valid();
 
 		int number;
 	};
 
+	std::ostream& operator<<(std::ostream&, const Year&);
 	bool operator==(const Year&, const Year&);
 	bool operator!=(const Year&, const Year&);
 }

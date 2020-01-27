@@ -65,11 +65,6 @@ namespace Chrono
             << "]" << std::endl;
     }
 
-    std::ostream& operator<<(std::ostream& os, const Date& date) {
-        os << date.year << "." << date.month << "." << date.day;
-        return os;
-    }
-
     std::istream& operator>>(std::istream& is, Date& date) {
         int year, month, day;
         std::cout << "Input year number: "; is >> year;
@@ -78,6 +73,13 @@ namespace Chrono
         Date fakeDate(year, month, day);
         date = fakeDate;
         return is;
+    }
+
+    std::ostream& operator<<(std::ostream& os, const Date& date) {
+        os  << date.getYear() << "." 
+            << date.getMonth() << "." 
+            << date.getDay();
+        return os;
     }
 
     bool operator==(const Date& left, const Date& right) {

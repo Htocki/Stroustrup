@@ -20,14 +20,14 @@ namespace Chrono
 		: number(static_cast<int>(name))
 	{}
 
-	std::ostream& operator<<(std::ostream& os, const Month& month) {
-		os << month.number;
-		return os;
-	}
-
 	bool Month::is_valid() {
 		if (number < min || number > max) return false;
 		else return true;
+	}
+
+	std::ostream& operator<<(std::ostream& os, const Month& month) {
+		os << month.getNumber();
+		return os;
 	}
 
 	bool operator==(const Month& left, const Month& right) {

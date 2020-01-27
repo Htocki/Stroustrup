@@ -22,14 +22,14 @@ namespace Chrono
 		return *this;
 	}
 
-	std::ostream& operator<<(std::ostream& os, const Day& day) {
-		os << day.number;
-		return os;
-	}
-
 	bool Day::is_valid() {
 		if (number < min || number > max) return false;
 		else return true;
+	}
+
+	std::ostream& operator<<(std::ostream& os, const Day& day) {
+		os << day.getNumber();
+		return os;
 	}
 
 	bool operator==(const Day& left, const Day& right) {

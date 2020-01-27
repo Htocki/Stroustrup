@@ -33,14 +33,13 @@ namespace Chrono
 
 		Day& operator++();
 
-		friend std::ostream& operator<<(std::ostream&, const Day&);
-
 	private:
 		bool is_valid();
 
 		int number;
 	};
 
+	std::ostream& operator<<(std::ostream&, const Day&);
 	bool operator==(const Day&, const Day&);
 	bool operator!=(const Day&, const Day&);
 }

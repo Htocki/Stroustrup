@@ -24,7 +24,6 @@ namespace Chrono
 
         void print();
 
-        friend std::ostream& operator<<(std::ostream&, const Date&);
         friend std::istream& operator>>(std::istream&, Date&);
 
     private:
@@ -32,7 +31,8 @@ namespace Chrono
         Month month;
         Day day;
     };
-
+    
+    std::ostream& operator<<(std::ostream&, const Date&);
     bool operator==(const Date&, const Date&);
     bool operator!=(const Date&, const Date&);
     bool leapyear(Year);

@@ -16,14 +16,14 @@ namespace Chrono
 		return *this;
 	}
 
-	std::ostream& operator<<(std::ostream& os, const Year& year) {
-		os << year.number;
-		return os;
-	}
-
 	bool Year::is_valid() {
 		if (number < min || number > max) return false;
 		else return true;
+	}
+
+	std::ostream& operator<<(std::ostream& os, const Year& year) {
+		os << year.getNumber();
+		return os;
 	}
 
 	bool operator==(const Year& left, const Year& right) {

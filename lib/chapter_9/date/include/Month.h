@@ -35,8 +35,6 @@ namespace Chrono
 		int getNumber() const { return number; }
 
 		Month& operator++();
-		
-		friend std::ostream& operator<<(std::ostream&, const Month&);
 
 	private:
 		bool is_valid();
@@ -44,6 +42,7 @@ namespace Chrono
 		int number;
 	};
 
+	std::ostream& operator<<(std::ostream&, const Month&);
 	bool operator==(const Month&, const Month&);
 	bool operator!=(const Month&, const Month&);
 }
