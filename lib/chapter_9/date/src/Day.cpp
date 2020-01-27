@@ -27,13 +27,6 @@ namespace Chrono
 		return os;
 	}
 
-	std::istream& operator>>(std::istream& is, Day& day) {
-		std::cout << "Input day number: ";
-		is >> day.number;
-		if (!day.is_valid()) throw Day::Invalid{};
-		return is;
-	}
-
 	bool Day::is_valid() {
 		if (number < min || number > max) return false;
 		else return true;

@@ -19,7 +19,6 @@ namespace Chrono
 		Year& operator++();
 
 		friend std::ostream& operator<<(std::ostream&, const Year&);
-		friend std::istream& operator>>(std::istream&, Year&);
 
 	private:
 		bool is_valid();

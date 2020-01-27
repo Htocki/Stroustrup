@@ -71,8 +71,11 @@ namespace Chrono
     }
 
     std::istream& operator>>(std::istream& is, Date& date) {
-        Date fakeDate;
-        is >> fakeDate._year >> fakeDate._month >> fakeDate._day;
+        int year, month, day;
+        std::cout << "Input year number: "; is >> year;
+        std::cout << "Input month number: "; is >> month;
+        std::cout << "Input day number: "; is >> day;
+        Date fakeDate(year, month, day);
         date = fakeDate;
         return is;
     }

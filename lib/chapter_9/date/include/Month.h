@@ -37,7 +37,6 @@ namespace Chrono
 		Month& operator++();
 		
 		friend std::ostream& operator<<(std::ostream&, const Month&);
-		friend std::istream& operator>>(std::istream&, Month&);
 
 	private:
 		bool is_valid();

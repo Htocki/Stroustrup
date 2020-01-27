@@ -25,13 +25,6 @@ namespace Chrono
 		return os;
 	}
 
-	std::istream& operator>>(std::istream& is, Month& month) {
-		std::cout << "Input month number: ";
-		is >> month.number;
-		if (!month.is_valid()) throw Month::Invalid{};
-		return is;
-	}
-
 	bool Month::is_valid() {
 		if (number < min || number > max) return false;
 		else return true;

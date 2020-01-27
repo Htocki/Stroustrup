@@ -21,13 +21,6 @@ namespace Chrono
 		return os;
 	}
 
-	std::istream& operator>>(std::istream& is, Year& year) {
-		std::cout << "Input year number: ";
-		is >> year.number;
-		if (!year.is_valid()) throw Year::Invalid{};
-		return is;
-	}
-
 	bool Year::is_valid() {
 		if (number < min || number > max) return false;
 		else return true;
