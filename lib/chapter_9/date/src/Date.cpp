@@ -5,22 +5,22 @@
 namespace Chrono
 {
     Date::Date()
-        : _year(default_date().year())
-        , _month(default_date().month())
-        , _day(default_date().day())
+        : year(default_date().getYear())
+        , month(default_date().getMonth())
+        , day(default_date().getDay())
     {}
 
     Date::Date(Year year, Month month, Day day)
-        : _year(year)
-        , _month(month)
-        , _day(day.getNumber(), days_in_month(year, month))
+        : year(year)
+        , month(month)
+        , day(day.getNumber(), days_in_month(year, month))
     {}
 
     void Date::add_year(int yearsAmount) {
         Date fakeDate(*this);
 
         while (yearsAmount) {
-            ++fakeDate._year;
+            ++fakeDate.year;
             --yearsAmount;
         }
         
@@ -31,9 +31,9 @@ namespace Chrono
         Date fakeDate(*this);
 
         while (monthsAmount) {
-            ++fakeDate._month;
+            ++fakeDate.month;
             --monthsAmount;
-            if (fakeDate.month().getNumber() == 1)
+            if (fakeDate.getMonth().getNumber() == 1)
                 fakeDate.add_year(1);
         }
         
@@ -44,12 +44,12 @@ namespace Chrono
         Date fakeDate(*this);
 
         while (daysAmount) {
-            ++fakeDate._day;
+            ++fakeDate.day;
             --daysAmount;
-            if (fakeDate.day().getNumber() == 1) {
+            if (fakeDate.getDay().getNumber() == 1) {
                 fakeDate.add_month(1);
-                fakeDate._day.setMax(
-                    days_in_month(fakeDate.year(), fakeDate.month())
+                fakeDate.day.setMax(
+                    days_in_month(fakeDate.getYear(), fakeDate.getMonth())
                 );
             }
         }
@@ -59,14 +59,14 @@ namespace Chrono
 
     void Date::print() {
         std::cout
-            << "[" << _year
-            << "." << _month
-            << "." << _day
+            << "[" << year
+            << "." << month
+            << "." << day
             << "]" << std::endl;
     }
 
     std::ostream& operator<<(std::ostream& os, const Date& date) {
-        os << date._year << "." << date._month << "." << date._day;
+        os << date.year << "." << date.month << "." << date.day;
         return os;
     }
 
@@ -81,9 +81,9 @@ namespace Chrono
     }
 
     bool operator==(const Date& left, const Date& right) {
-        if (left.day() == right.day() &&
-            left.month() == right.month() &&
-            left.year() == right.year())
+        if (left.getDay() == right.getDay() &&
+            left.getMonth() == right.getMonth() &&
+            left.getYear() == right.getYear())
             return true;
         else
             return false;
@@ -120,9 +120,9 @@ namespace Chrono
     }
 
     ::Day day_of_week(const Date& date) {
-        int day = date.day().getNumber();
-        int month = date.month().getNumber();
-        int year = date.year().getNumber();
+        int day = date.getDay().getNumber();
+        int month = date.getMonth().getNumber();
+        int year = date.getYear().getNumber();
 
         if (month < 3u) {
             --year;

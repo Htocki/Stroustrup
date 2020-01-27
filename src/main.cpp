@@ -16,32 +16,32 @@ int main() {
 		d02.print();
 
 		std::cout << "Current data: "
-			<< d.year() << "."
-			<< d.month() << "."
-			<< d.day() << std::endl;
+			<< d.getYear() << "."
+			<< d.getMonth() << "."
+			<< d.getDay() << std::endl;
 
 		Chrono::Date d1(2200, 2, 28);
 		std::cout
 			<< "Leap year [" << d1 << "]: "
-			<< Chrono::leapyear(d1.year().getNumber())
+			<< Chrono::leapyear(d1.getYear().getNumber())
 			<< std::endl;
 
 		Chrono::Date d2(1912, 3, 29);
 		std::cout
 			<< "Leap year [" << d2 << "]: "
-			<< Chrono::leapyear(d2.year().getNumber())
+			<< Chrono::leapyear(d2.getYear().getNumber())
 			<< std::endl;
 
 		Chrono::Date d3(1900, 2, 28);
 		std::cout
 			<< "Leap year [" << d3 << "]: "
-			<< Chrono::leapyear(d3.year().getNumber())
+			<< Chrono::leapyear(d3.getYear().getNumber())
 			<< std::endl;
 
 		Chrono::Date d4(2000, 2, 29);
 		std::cout
 			<< "Leap year [" << d4 << "]: "
-			<< Chrono::leapyear(d4.year().getNumber())
+			<< Chrono::leapyear(d4.getYear().getNumber())
 			<< std::endl;
 
 

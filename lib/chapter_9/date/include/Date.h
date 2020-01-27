@@ -14,9 +14,9 @@ namespace Chrono
         Date();
         Date(Year, Month, Day);
 
-        Year year() const { return _year; }
-        Month month() const { return _month; }
-        Day day() const { return _day; }
+        Year getYear() const { return this->year; }
+        Month getMonth() const { return this->month; }
+        Day getDay() const { return this->day; }
 
         void add_year(int);
         void add_month(int);
@@ -28,9 +28,9 @@ namespace Chrono
         friend std::istream& operator>>(std::istream&, Date&);
 
     private:
-        Year _year;
-        Month _month;
-        Day _day;
+        Year year;
+        Month month;
+        Day day;
     };
 
     bool operator==(const Date&, const Date&);
