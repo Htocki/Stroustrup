@@ -118,4 +118,22 @@ namespace Chrono
 
         return months.at(month.getNumber() - 1);
     }
+
+    ::Day day_of_week(const Date& date) {
+        int day = date.day().getNumber();
+        int month = date.month().getNumber();
+        int year = date.year().getNumber();
+
+        if (month < 3u) {
+            --year;
+            month += 10u;
+        }
+        else
+            month -= 2u;
+
+        return static_cast<::Day>(
+            (day + 31u * month / 12u + year + year / 4u - year / 100u
+                + year / 400u) % 7u
+            );
+    }
 }

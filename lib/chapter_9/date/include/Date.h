@@ -37,7 +37,6 @@ namespace Chrono
     bool operator!=(const Date&, const Date&);
     bool leapyear(Year);
     const Date& default_date();
-    int days_in_year(Year);
     int days_in_month(Year, Month);
-    
+    ::Day day_of_week(const Date&);
 }

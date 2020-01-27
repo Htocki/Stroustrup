@@ -3,6 +3,18 @@
 
 
 
+enum class Day {
+	Sunday,
+	Monday,
+	Tuesday,
+	Wednesday,
+	Thursday,
+	Friday,
+	Saturday
+};
+
+
+
 namespace Chrono
 {
 	class Day {

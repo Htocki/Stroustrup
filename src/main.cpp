@@ -88,6 +88,7 @@ int main() {
 		Chrono::Date inputDate;
 		std::cin >> inputDate;
 		inputDate.print();
+
 	}
 	catch (Chrono::Year::Invalid) {
 		std::cerr << "Exception: year is incorrect." << std::endl;
