@@ -39,4 +39,6 @@ namespace Chrono
     const Date& default_date();
     int days_in_month(Year, Month);
     ::Day day_of_week(const Date&);
+    Date next_sunday(const Date&);
+    Date next_weekday(const Date&);
 }

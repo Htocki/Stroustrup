@@ -2,7 +2,9 @@ cmake_minimum_required (VERSION 3.15)
 
 set (TEST_SOURCES
     "test/leapyear.cpp"
-    "test/dayOfWeek.cpp"
+    "test/day_of_week.cpp"
+    "test/next_sunday.cpp"
+    "test/next_weekday.cpp"
     "test/main.cpp")
 
 set (INCLUDE

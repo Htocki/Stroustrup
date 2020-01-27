@@ -136,4 +136,19 @@ namespace Chrono
                 + year / 400u) % 7u
             );
     }
+
+    Date next_sunday(const Date& date) {
+        Date fakeDate(date);
+        do fakeDate.add_day(1);
+        while (day_of_week(fakeDate) != ::Day::Sunday);
+        return fakeDate;
+    }
+
+    Date next_weekday(const Date& date) {
+        Date fakeDate(date);
+        do fakeDate.add_day(1);
+        while (day_of_week(fakeDate) == ::Day::Saturday
+            || day_of_week(fakeDate) == ::Day::Sunday);
+        return fakeDate;
+    }
 }
