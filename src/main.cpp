@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Date.h"
 #include "Name_pairs.h"
+#include "Book.h"
 
 
 
@@ -10,6 +11,7 @@ using namespace Chrono;
 
 
 int main() {
+	/*
 	try {
 		Date d(1820, 1, 23);
 		d.print();
@@ -82,8 +84,10 @@ int main() {
 	}
 	catch (...) {
 		std::cerr << "Unknown exception." << std::endl;
-	}
+	}*/
 
+
+	/*
 	std::cout << std::endl << std::endl;
 	Name_pairs pairs;
 	pairs.read_names();
@@ -95,7 +99,22 @@ int main() {
 	Name_pairs right{ {"Adolf", 45}, {"Michal", 56} };
 	std::cout << "left == right: " << operator==(left, right) << std::endl;
 	std::cout << "left != right: szz" << operator!=(left, right) << std::endl;
-	
+	*/
+
+
+	try {
+		Book book{
+			"Hustoruua Bielarusiu",
+			"Uanus Alieuskiu",
+			"2423-2234-2304-D",
+			Date(2020, 12, 1)
+		};
+
+	}
+	catch (...) {
+		std::cerr << "Exception... :(" << std::endl;
+	}
+
 	std::string s;
 	std::getline(std::cin, s);
 }
