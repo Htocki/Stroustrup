@@ -1,6 +1,7 @@
-#include "Date.h"
 #include <string>
 #include <iostream>
+#include "Date.h"
+#include "Name_pairs.h"
 
 
 
@@ -82,6 +83,18 @@ int main() {
 	catch (...) {
 		std::cerr << "Unknown exception." << std::endl;
 	}
+
+	std::cout << std::endl << std::endl;
+	Name_pairs pairs;
+	pairs.read_names();
+	pairs.read_ages();
+	pairs.print();
+	pairs.sort();
+	std::cout << pairs << std::endl;
+	Name_pairs left{ {"Adolf", 45}, {"Michal", 56} };
+	Name_pairs right{ {"Adolf", 45}, {"Michal", 56} };
+	std::cout << "left == right: " << operator==(left, right) << std::endl;
+	std::cout << "left != right: szz" << operator!=(left, right) << std::endl;
 	
 	std::string s;
 	std::getline(std::cin, s);
