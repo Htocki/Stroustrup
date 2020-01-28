@@ -103,13 +103,24 @@ int main() {
 
 
 	try {
-		Book book{
+		Book left{
 			"Hustoruua Bielarusiu",
 			"Uanus Alieuskiu",
 			"2423-2234-2304-D",
 			Date(2020, 12, 1)
 		};
 
+		Book right{
+			"Prahramawannje za 28 dzion",
+			"Dawau Hrosu",
+			"2423-2234-2334-D",
+			Date(2000, 2, 11)
+		};
+
+		std::cout << "left == right: " << operator==(left, right) << std::endl;
+		std::cout << "left != right: " << operator!=(left, right) << std::endl;
+		std::cout << std::endl;
+		std::cout << left << right << std::endl;
 	}
 	catch (...) {
 		std::cerr << "Exception... :(" << std::endl;

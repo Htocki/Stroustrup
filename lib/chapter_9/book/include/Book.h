@@ -2,6 +2,7 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#include <iostream>
 #include "Date.h"
 
 
@@ -29,3 +30,9 @@ private:
 	bool is_valid(std::string);
 	bool is_number(std::string);
 };
+
+
+
+bool operator==(const Book&, const Book&);
+bool operator!=(const Book&, const Book&);
+std::ostream& operator<<(std::ostream&, const Book&);

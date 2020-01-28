@@ -41,3 +41,19 @@ bool Book::is_number(std::string string) {
 		if (!std::isdigit(e)) return false;
 	return true;
 }
+
+bool operator==(const Book& left, const Book& right) {
+	return operator==(left.isbn(), right.isbn());
+}
+
+bool operator!=(const Book& left, const Book& right) {
+	return operator!=(left.isbn(), right.isbn());
+}
+
+std::ostream& operator<<(std::ostream& os, const Book& book) {
+	os  << "Title: " << book.title() << std::endl
+		<< "Author: " << book.author() << std::endl
+		<< "ISBN: " << book.isbn() << std::endl
+		<< std::endl;
+	return os;
+}
