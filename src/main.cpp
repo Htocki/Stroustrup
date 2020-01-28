@@ -106,6 +106,7 @@ int main() {
 		Book left{
 			"Hustoruua Bielarusiu",
 			"Uanus Alieuskiu",
+			Book::Genre::Periodical,
 			"2423-2234-2304-D",
 			Date(2020, 12, 1)
 		};
@@ -113,6 +114,7 @@ int main() {
 		Book right{
 			"Prahramawannje za 28 dzion",
 			"Dawau Hrosu",
+			Book::Genre::Fantastic,
 			"2423-2234-2334-D",
 			Date(2000, 2, 11)
 		};

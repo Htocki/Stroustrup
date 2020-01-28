@@ -9,14 +9,23 @@
 
 class Book {
 public:
+	enum class Genre {
+		Fantastic,
+		Prose,
+		Periodical,
+		Bibliography,
+		Juvenile
+	};
+
 	class Invalid_ISBN {};
 
-	Book(std::string, std::string, std::string, Chrono::Date);
+	Book(std::string, std::string, Genre, std::string, Chrono::Date);
 
 	std::string isbn() const { return _isbn; }
 	std::string title() const { return _title; }
 	std::string author() const { return _author; }
 	Chrono::Date copyright_rd() const { return _copyright_rd; }
+	Genre genre() const { return _genre; }
 	
 	bool is_giving_out() { return _giving_out; }
 
@@ -25,6 +34,7 @@ private:
 	std::string _title;
 	std::string _author;
 	Chrono::Date _copyright_rd;	// Copyright registration date
+	Genre _genre;
 	bool _giving_out;
 
 	bool is_valid(std::string);
@@ -36,3 +46,4 @@ private:
 bool operator==(const Book&, const Book&);
 bool operator!=(const Book&, const Book&);
 std::ostream& operator<<(std::ostream&, const Book&);
+std::ostream& operator<<(std::ostream&, const Book::Genre&);

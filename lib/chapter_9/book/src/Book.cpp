@@ -5,11 +5,13 @@
 Book::Book(
 	std::string title,
 	std::string author,
+	Genre genre,
 	std::string isbn,
 	Chrono::Date copyright_rd
 )
 	: _title(title)
 	, _author(author)
+	, _genre(genre)
 	, _copyright_rd(copyright_rd)
 {
 	if (!is_valid(isbn)) throw Invalid_ISBN{};
@@ -53,7 +55,29 @@ bool operator!=(const Book& left, const Book& right) {
 std::ostream& operator<<(std::ostream& os, const Book& book) {
 	os  << "Title: " << book.title() << std::endl
 		<< "Author: " << book.author() << std::endl
+		<< "Genre: " << book.genre() << std::endl
 		<< "ISBN: " << book.isbn() << std::endl
 		<< std::endl;
+	return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const Book::Genre& genre) {
+	switch (genre) {
+	case Book::Genre::Bibliography:
+		os << "Bibliography";
+		break;
+	case Book::Genre::Fantastic:
+		os << "Fantastic";
+		break;
+	case Book::Genre::Juvenile:
+		os << "Juvenile";
+		break;
+	case Book::Genre::Periodical:
+		os << "Periodical";
+		break;
+	case Book::Genre::Prose:
+		os << "Prose";
+		break;
+	}
 	return os;
 }
