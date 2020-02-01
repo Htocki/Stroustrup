@@ -13,12 +13,14 @@ target_link_libraries (${PROJECT_NAME}
 		book
 		date
 		name_pairs
+		patron
 	)
 
 add_subdirectory ("lib/googletest")
 add_subdirectory ("lib/chapter_9/book")
 add_subdirectory ("lib/chapter_9/date")
 add_subdirectory ("lib/chapter_9/name_pairs")
+add_subdirectory ("lib/chapter_9/patron")
 
 set_target_properties (${PROJECT_NAME}
 	PROPERTIES
@@ -31,4 +33,5 @@ target_include_directories (${PROJECT_NAME}
 		"lib/chapter_9/book/include"
 		"lib/chapter_9/date/include"
 		"lib/chapter_9/name_pairs/include"
+		"lib/chapter_9/patron/include"
     )

@@ -1,8 +1,9 @@
 #include <string>
 #include <iostream>
+#include "Book.h"
 #include "Date.h"
 #include "Name_pairs.h"
-#include "Book.h"
+#include "Patron.h"
 
 
 
@@ -101,7 +102,7 @@ int main() {
 	std::cout << "left != right: szz" << operator!=(left, right) << std::endl;
 	*/
 
-
+	/*
 	try {
 		Book left{
 			"Hustoruua Bielarusiu",
@@ -127,6 +128,22 @@ int main() {
 	catch (...) {
 		std::cerr << "Exception... :(" << std::endl;
 	}
+	*/
+
+	Patron patron {
+		"Adam Woras",
+		647646
+	};
+
+	std::cout << "patron.user_name(): " 
+		<< patron.user_name() << std::endl;
+	std::cout << "patron.library_card_number(): "
+		<< patron.library_card_number() << std::endl;
+	std::cout << "patron.membership_fee(): "
+		<< patron.membership_fee() << std::endl;
+	std::cout << "patron.is_membership_fee_paid(): "
+		<< patron.is_membership_fee_paid() << std::endl;
+
 
 	std::string s;
 	std::getline(std::cin, s);
