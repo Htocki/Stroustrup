@@ -2,17 +2,19 @@
 
 
 
+Book::Book() {}
+
 Book::Book(
 	std::string title,
-	std::string author,
-	Genre genre,
 	std::string isbn,
-	Chrono::Date copyright_rd
+	std::string author,
+	Date crd,
+	Genre genre
 )
 	: _title(title)
 	, _author(author)
+	, _crd(crd)
 	, _genre(genre)
-	, _copyright_rd(copyright_rd)
 {
 	if (!is_valid(isbn)) throw Invalid_ISBN{};
 	else _isbn = isbn;
@@ -44,6 +46,45 @@ bool Book::is_number(std::string string) {
 	return true;
 }
 
+std::istream& operator>>(std::istream& is, Book& book) {
+	is.clear();
+
+	std::string title;
+	std::cout << "Input book title: ";
+	std::getline(is, title);
+
+	std::string isbn;
+	std::cout << "Input book ISBN: ";
+	std::getline(is, isbn);
+
+	std::string author;
+	std::cout << "Input book author: ";
+	std::getline(is, author);
+
+	Date date;
+	std::cout << "Input book copyright registration date: " << std::endl;
+	is >> date;
+
+	Book::Genre genre;
+	std::cout << "Input book genre: ";
+	is >> genre;
+
+	book = Book(title, isbn, author, date, genre);
+
+	std::cout << std::endl << std::endl;
+
+	return is;
+}
+
+std::ostream& operator<<(std::ostream& os, const Book& book) {
+	os << "Title: " << book.title() << std::endl
+		<< "Author: " << book.author() << std::endl
+		<< "Genre: " << book.genre() << std::endl
+		<< "ISBN: " << book.isbn() << std::endl
+		<< std::endl;
+	return os;
+}
+
 bool operator==(const Book& left, const Book& right) {
 	return operator==(left.isbn(), right.isbn());
 }
@@ -52,13 +93,27 @@ bool operator!=(const Book& left, const Book& right) {
 	return operator!=(left.isbn(), right.isbn());
 }
 
-std::ostream& operator<<(std::ostream& os, const Book& book) {
-	os  << "Title: " << book.title() << std::endl
-		<< "Author: " << book.author() << std::endl
-		<< "Genre: " << book.genre() << std::endl
-		<< "ISBN: " << book.isbn() << std::endl
-		<< std::endl;
-	return os;
+std::istream& operator>>(std::istream& is, Book::Genre& genre) {
+	is.clear();
+	is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+	std::string s_genre;
+	std::getline(is, s_genre);
+
+	if (s_genre == "Bibliography")
+		genre = Book::Genre::Bibliography;
+	else if (s_genre == "Fantastic")
+		genre = Book::Genre::Fantastic;
+	else if (s_genre == "Juvenile")
+		genre = Book::Genre::Juvenile;
+	else if (s_genre == "Periodical")
+		genre = Book::Genre::Periodical;
+	else if (s_genre == "Prose")
+		genre = Book::Genre::Prose;
+	else
+		genre = Book::Genre::NotSpecified;
+
+	return is;
 }
 
 std::ostream& operator<<(std::ostream& os, const Book::Genre& genre) {
@@ -77,6 +132,9 @@ std::ostream& operator<<(std::ostream& os, const Book::Genre& genre) {
 		break;
 	case Book::Genre::Prose:
 		os << "Prose";
+		break;
+	case Book::Genre::NotSpecified:
+		os << "Not Specified";
 		break;
 	}
 	return os;

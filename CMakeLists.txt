@@ -12,6 +12,7 @@ target_link_libraries (${PROJECT_NAME}
 	PUBLIC
 		book
 		date
+		library
 		name_pairs
 		patron
 	)
@@ -19,6 +20,7 @@ target_link_libraries (${PROJECT_NAME}
 add_subdirectory ("lib/googletest")
 add_subdirectory ("lib/chapter_9/book")
 add_subdirectory ("lib/chapter_9/date")
+add_subdirectory ("lib/chapter_9/library")
 add_subdirectory ("lib/chapter_9/name_pairs")
 add_subdirectory ("lib/chapter_9/patron")
 
@@ -32,6 +34,7 @@ target_include_directories (${PROJECT_NAME}
     PRIVATE
 		"lib/chapter_9/book/include"
 		"lib/chapter_9/date/include"
+		"lib/chapter_9/library/include"
 		"lib/chapter_9/name_pairs/include"
 		"lib/chapter_9/patron/include"
     )

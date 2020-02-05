@@ -5,37 +5,37 @@
 
 TEST(DateTest, nextSundayTest) {
 	EXPECT_EQ(
-		Chrono::next_sunday(Chrono::Date(2020, 1, 27)),
-		Chrono::Date(2020, 2, 2)
+		next_sunday(Date(2020, 1, 27)),
+		Date(2020, 2, 2)
 	);
 
 	EXPECT_EQ(
-		Chrono::next_sunday(Chrono::Date(2020, 1, 28)),
-		Chrono::Date(2020, 2, 2)
+		next_sunday(Date(2020, 1, 28)),
+		Date(2020, 2, 2)
 	);
 
 	EXPECT_EQ(
-		Chrono::next_sunday(Chrono::Date(2020, 1, 29)),
-		Chrono::Date(2020, 2, 2)
+		next_sunday(Date(2020, 1, 29)),
+		Date(2020, 2, 2)
 	);
 
 	EXPECT_EQ(
-		Chrono::next_sunday(Chrono::Date(2020, 1, 30)),
-		Chrono::Date(2020, 2, 2)
+		next_sunday(Date(2020, 1, 30)),
+		Date(2020, 2, 2)
 	);
 
 	EXPECT_EQ(
-		Chrono::next_sunday(Chrono::Date(2020, 1, 31)),
-		Chrono::Date(2020, 2, 2)
+		next_sunday(Date(2020, 1, 31)),
+		Date(2020, 2, 2)
 	);
 
 	EXPECT_EQ(
-		Chrono::next_sunday(Chrono::Date(2020, 2, 1)),
-		Chrono::Date(2020, 2, 2)
+		next_sunday(Date(2020, 2, 1)),
+		Date(2020, 2, 2)
 	);
 
 	EXPECT_EQ(
-		Chrono::next_sunday(Chrono::Date(2020, 2, 2)),
-		Chrono::Date(2020, 2, 9)
+		next_sunday(Date(2020, 2, 2)),
+		Date(2020, 2, 9)
 	);
 }

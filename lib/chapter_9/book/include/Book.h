@@ -10,6 +10,7 @@
 class Book {
 public:
 	enum class Genre {
+		NotSpecified,
 		Fantastic,
 		Prose,
 		Periodical,
@@ -19,31 +20,35 @@ public:
 
 	class Invalid_ISBN {};
 
-	Book(std::string, std::string, Genre, std::string, Chrono::Date);
+	Book();
+	Book(std::string, std::string, std::string, Date, Genre);
 
 	std::string isbn() const { return _isbn; }
 	std::string title() const { return _title; }
 	std::string author() const { return _author; }
-	Chrono::Date copyright_rd() const { return _copyright_rd; }
+	Date copyright_rd() const { return _crd; }
 	Genre genre() const { return _genre; }
 	
 	bool is_giving_out() { return _giving_out; }
 
 private:
-	std::string _isbn;
-	std::string _title;
-	std::string _author;
-	Chrono::Date _copyright_rd;	// Copyright registration date
-	Genre _genre;
-	bool _giving_out;
+	std::string _title = "Not specified";
+	std::string _isbn = "Not specified";
+	std::string _author = "Not specified";
+	Date _crd; // Copyright registration date
+	Genre _genre = Genre::NotSpecified;
+	bool _giving_out = false;
 
 	bool is_valid(std::string);
 	bool is_number(std::string);
+
+	friend std::istream& operator>>(std::istream&, Book&);
 };
 
 
 
+std::ostream& operator<<(std::ostream&, const Book&);
 bool operator==(const Book&, const Book&);
 bool operator!=(const Book&, const Book&);
-std::ostream& operator<<(std::ostream&, const Book&);
+std::istream& operator>>(std::istream&, Book::Genre&);
 std::ostream& operator<<(std::ostream&, const Book::Genre&);

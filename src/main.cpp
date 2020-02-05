@@ -4,10 +4,8 @@
 #include "Date.h"
 #include "Name_pairs.h"
 #include "Patron.h"
+#include "Library.h"
 
-
-
-using namespace Chrono;
 
 
 
@@ -130,6 +128,7 @@ int main() {
 	}
 	*/
 
+	/*
 	Patron patron {
 		"Adam Woras",
 		647646
@@ -143,7 +142,16 @@ int main() {
 		<< patron.membership_fee() << std::endl;
 	std::cout << "patron.is_membership_fee_paid(): "
 		<< patron.is_membership_fee_paid() << std::endl;
+	*/
 
+	try {
+		Library library;
+		library.add_book();
+		library.add_book();
+	}
+	catch (...) {
+		std::cerr << "Exception :(" << std::endl;
+	}
 
 	std::string s;
 	std::getline(std::cin, s);
