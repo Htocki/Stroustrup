@@ -147,7 +147,7 @@ int main() {
 	try {
 		Library library;
 		library.add_book();
-		library.add_book();
+		library.add_patron();
 	}
 	catch (...) {
 		std::cerr << "Exception :(" << std::endl;

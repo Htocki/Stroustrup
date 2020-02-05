@@ -8,10 +8,8 @@ void Library::add_book() {
 	_books.push_back(book);
 }
 
-void Library::add_client() {
-
-}
-
-void Library::add_transaction() {
-
+void Library::add_patron() {
+	Patron patron;
+	std::cin >> patron;
+	_patrons.push_back(patron);
 }

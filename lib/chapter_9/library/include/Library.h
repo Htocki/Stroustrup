@@ -17,6 +17,7 @@ public:
 	};
 
 	void add_book();
+	void add_patron();
 
 
 private:

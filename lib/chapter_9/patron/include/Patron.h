@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream>
 
 
 
@@ -23,5 +24,10 @@ private:
 	std::string _user_name;
 	int			_library_card_number;
 	int			_membership_fee;
+
 	bool		_membership_fee_paid;
 };
+
+
+
+std::istream& operator>>(std::istream&, Patron&);

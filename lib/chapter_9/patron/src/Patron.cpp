@@ -35,3 +35,19 @@ void Patron::membership_fee(int membership_fee) {
 	if (membership_fee < 0) throw Invalid{};
 	else _membership_fee = membership_fee;
 }
+
+std::istream& operator>>(std::istream& is, Patron& patron) {
+	std::cout << "Input patron name: ";
+	std::string name; is >> name;
+	patron.user_name(name);
+
+	std::cout << "Input library card number: ";
+	int number;  is >> number;
+	patron.library_card_number(number);
+
+	std::cout << "Input size of membership fee: ";
+	int size; is >> size;
+	patron.membership_fee(size);
+
+	return is;
+}
