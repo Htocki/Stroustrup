@@ -10,7 +10,6 @@
 
 
 int main() {
-	/*
 	try {
 		Date d(1820, 1, 23);
 		d.print();
@@ -29,7 +28,7 @@ int main() {
 
 		std::cout << std::endl << std::endl;
 
-		Chrono::Date addDate(2020, 1, 17);
+		Date addDate(2020, 1, 17);
 		addDate.print();
 
 		addDate.add_year(5);
@@ -83,39 +82,36 @@ int main() {
 	}
 	catch (...) {
 		std::cerr << "Unknown exception." << std::endl;
-	}*/
+	}
 
 
-	/*
 	std::cout << std::endl << std::endl;
-	Name_pairs pairs;
+	Namepairs pairs;
 	pairs.read_names();
 	pairs.read_ages();
 	pairs.print();
 	pairs.sort();
 	std::cout << pairs << std::endl;
-	Name_pairs left{ {"Adolf", 45}, {"Michal", 56} };
-	Name_pairs right{ {"Adolf", 45}, {"Michal", 56} };
+	Namepairs left{ {"Adolf", 45}, {"Michal", 56} };
+	Namepairs right{ {"Adolf", 45}, {"Michal", 56} };
 	std::cout << "left == right: " << operator==(left, right) << std::endl;
 	std::cout << "left != right: szz" << operator!=(left, right) << std::endl;
-	*/
 
-	/*
 	try {
 		Book left{
 			"Hustoruua Bielarusiu",
-			"Uanus Alieuskiu",
-			Book::Genre::Periodical,
 			"2423-2234-2304-D",
-			Date(2020, 12, 1)
+			"Uanus Alieuskiu",
+			Date(2020, 12, 1),
+			Book::Genre::Periodical
 		};
 
 		Book right{
 			"Prahramawannje za 28 dzion",
-			"Dawau Hrosu",
-			Book::Genre::Fantastic,
 			"2423-2234-2334-D",
-			Date(2000, 2, 11)
+			"Dawau Hrosu",
+			Date(2000, 2, 11),
+			Book::Genre::Fantastic,
 		};
 
 		std::cout << "left == right: " << operator==(left, right) << std::endl;
@@ -126,12 +122,11 @@ int main() {
 	catch (...) {
 		std::cerr << "Exception... :(" << std::endl;
 	}
-	*/
 
-	/*
 	Patron patron {
 		"Adam Woras",
-		647646
+		647646,
+		12
 	};
 
 	std::cout << "patron.user_name(): " 
@@ -142,7 +137,6 @@ int main() {
 		<< patron.membership_fee() << std::endl;
 	std::cout << "patron.is_membership_fee_paid(): "
 		<< patron.is_membership_fee_paid() << std::endl;
-	*/
 
 	try {
 		Library library;
