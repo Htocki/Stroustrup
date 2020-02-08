@@ -1,23 +1,23 @@
 #include "gtest/gtest.h"
-#include "Name_pairs.h"
+#include "Namepairs.h"
 
 
 
-TEST(Name_pairsTest, operatorNotEqTest) {
-	Name_pairs one{
+TEST(NamepairsTest, operatorNotEqTest) {
+	Namepairs one{
 		{ "Hallo", 1 },
 		{ "My", 2 },
 		{ "friend", 3 }
 	};
 
-	Name_pairs two{
+	Namepairs two{
 		{ "Hallo", 1 },
 		{ "My", 2 },
 		{ "Little", 3 },
 		{ "Friend", 4 }
 	};
 
-	Name_pairs three;
+	Namepairs three;
 
 	EXPECT_EQ(operator!=(one, one), 0);
 	EXPECT_EQ(operator!=(one, two), 1);

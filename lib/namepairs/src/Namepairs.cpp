@@ -1,17 +1,17 @@
-#include "Name_pairs.h"
+#include "Namepairs.h"
 
 
 
-Name_pairs::Name_pairs() {}
+Namepairs::Namepairs() {}
 
-Name_pairs::Name_pairs(std::initializer_list<std::pair<std::string, int>> list) {
+Namepairs::Namepairs(std::initializer_list<std::pair<std::string, int>> list) {
 	for (auto e : list) {
 		_names.push_back(e.first);
 		_ages.push_back(e.second);
 	}
 }
 
-void Name_pairs::read_names() {
+void Namepairs::read_names() {
 	std::cin.clear();
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::string name_sequence;
@@ -30,7 +30,7 @@ void Name_pairs::read_names() {
 	std::cout << std::endl;
 }
 
-void Name_pairs::read_ages() {
+void Namepairs::read_ages() {
 	if (_names.size() == 0)
 		std::cerr << "It is not possible to match the names with "
 			"age because the container with the names is empty."
@@ -48,13 +48,13 @@ void Name_pairs::read_ages() {
 	std::cout << std::endl;
 }
 
-void Name_pairs::print() {
+void Namepairs::print() {
 	for (decltype(_names.size()) i{ 0 }; i < _names.size(); ++i)
 		std::cout << _names[i] << " " << _ages[i] << std::endl;
 	std::cout << std::endl;
 }
 
-void Name_pairs::sort() {
+void Namepairs::sort() {
 	std::string temp_name;
 	int temp_age;
 
@@ -73,14 +73,14 @@ void Name_pairs::sort() {
 	}
 }
 
-std::ostream& operator<<(std::ostream& os, const Name_pairs& pairs) {
+std::ostream& operator<<(std::ostream& os, const Namepairs& pairs) {
 	for (decltype(pairs._names.size()) i(0); i < pairs._names.size(); ++i)
 		os << pairs._names[i] << " " << pairs._ages[i] << std::endl;
 	os << std::endl;
 	return os;
 }
 
-bool operator==(const Name_pairs& left, const Name_pairs& right) {
+bool operator==(const Namepairs& left, const Namepairs& right) {
 	if (left._names.size() == right._names.size() &&
 		left._ages.size() == right._ages.size()) {
 		for (decltype(left._names.size()) i(0); i < left._names.size(); ++i)
@@ -93,6 +93,6 @@ bool operator==(const Name_pairs& left, const Name_pairs& right) {
 		return false;
 }
 
-bool operator!=(const Name_pairs& left, const Name_pairs& right) {
+bool operator!=(const Namepairs& left, const Namepairs& right) {
 	return !operator==(left, right);
 }
