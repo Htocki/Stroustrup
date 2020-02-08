@@ -4,7 +4,7 @@ set (SOURCES
 	"src/main.cpp"
 	)
 
-project (Straustrup)
+project ("Straustrup")
 
 add_executable (${PROJECT_NAME} ${SOURCES})
 
