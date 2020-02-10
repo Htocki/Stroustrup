@@ -10,6 +10,7 @@
 
 
 int main() {
+/*
 	try {
 		Date d(1820, 1, 23);
 		d.print();
@@ -137,11 +138,12 @@ int main() {
 		<< patron.membership_fee() << std::endl;
 	std::cout << "patron.is_membership_fee_paid(): "
 		<< patron.is_membership_fee_paid() << std::endl;
-
+*/
 	try {
 		Library library;
 		library.add_book();
 		library.add_patron();
+		library.add_transaction();
 	}
 	catch (...) {
 		std::cerr << "Exception :(" << std::endl;
