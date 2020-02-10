@@ -5,6 +5,7 @@
 #include "Namepairs.h"
 #include "Patron.h"
 #include "Library.h"
+#include "Rational.h"
 
 
 
@@ -138,7 +139,7 @@ int main() {
 		<< patron.membership_fee() << std::endl;
 	std::cout << "patron.is_membership_fee_paid(): "
 		<< patron.is_membership_fee_paid() << std::endl;
-*/
+
 	try {
 		Library library;
 		library.add_book();
@@ -148,6 +149,7 @@ int main() {
 	catch (...) {
 		std::cerr << "Exception :(" << std::endl;
 	}
+	*/
 
 	std::string s;
 	std::getline(std::cin, s);

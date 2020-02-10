@@ -21,6 +21,7 @@ target_link_libraries (${PROJECT_NAME}
 		library
 		namepairs
 		patron
+		rational
 	)
 
 add_subdirectory ("lib/googletest")
@@ -29,3 +30,4 @@ add_subdirectory ("lib/date")
 add_subdirectory ("lib/library")
 add_subdirectory ("lib/namepairs")
 add_subdirectory ("lib/patron")
+add_subdirectory ("lib/rational")
