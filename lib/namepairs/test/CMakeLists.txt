@@ -1,9 +1,9 @@
 cmake_minimum_required (VERSION 3.15)
 
 set (SOURCES
-	"main.cpp"
-	"operatorEq.cpp"
-	"operatorNotEq.cpp"
+	"EqualOperator.cpp"
+	"Main.cpp"
+	"NotEqualOperator.cpp"
 	)
 
 project ("namepairs-test")

@@ -1,9 +1,9 @@
 set (SOURCES
-    "leapyear.cpp"
-    "day_of_week.cpp"
-    "next_sunday.cpp"
-    "next_weekday.cpp"
-    "main.cpp"
+    "Day_of_week.cpp"
+    "Leapyear.cpp"
+    "Main.cpp"
+    "Next_sunday.cpp"
+    "Next_weekday.cpp"
     )
 
 project ("date-test")

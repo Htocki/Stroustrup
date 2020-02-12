@@ -4,10 +4,10 @@ set (SOURCES
 	"AdditionOperator.cpp"
 	"DivisionOperator.cpp"
 	"EqualOperator.cpp"
-	"ToDouble.cpp"
-	"MultiplicationOperator.cpp"
 	"Main.cpp"
+	"MultiplicationOperator.cpp"
 	"SubtractionOperator.cpp"
+	"ToDouble.cpp"
 	)
 
 project ("rational-test")

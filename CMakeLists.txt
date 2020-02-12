@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.15)
 
 set (SOURCES 
-	"src/main.cpp"
+	"src/Main.cpp"
 	)
 
 project ("Straustrup")
