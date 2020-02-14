@@ -9,22 +9,28 @@ Rational::Rational(int numerator, int denominator)
 	, denominator(denominator)
 {}
 
-Rational Rational::operator+(const Rational& other) {
+Rational& Rational::operator+=(const Rational& other) {
 	Rational a = (*this).reduce();
 	Rational b = other.reduce();
-	
+
 	int multiple = lcm(a.denominator, b.denominator);
 
 	a.numerator *= multiple / a.denominator;
 	b.numerator *= multiple / b.denominator;
 
-	return Rational(
+	Rational rez(
 		a.numerator + b.numerator,
 		multiple
-	).reduce();
+	);
+
+	rez.reduce();
+	this->numerator = rez.numerator;
+	this->denominator = rez.denominator;
+
+	return rez;
 }
 
-Rational Rational::operator-(const Rational& other) {
+Rational& Rational::operator-=(const Rational& other) {
 	Rational a = (*this).reduce();
 	Rational b = other.reduce();
 
@@ -33,24 +39,44 @@ Rational Rational::operator-(const Rational& other) {
 	a.numerator *= multiple / a.denominator;
 	b.numerator *= multiple / b.denominator;
 
-	return Rational(
+	Rational rez(
 		a.numerator - b.numerator,
 		multiple
-	).reduce();
+	);
+	rez.reduce();
+	this->numerator = rez.numerator;
+	this->denominator = rez.denominator;
+	
+	return rez;
 }
 
-Rational Rational::operator*(const Rational& other) {
-	return Rational(
+Rational& Rational::operator*=(const Rational& other) {
+	Rational rez(
 		this->numerator * other.numerator,
 		this->denominator * other.denominator
-	).reduce();
+	);
+	rez.reduce();
+	this->numerator = rez.numerator;
+	this->denominator = rez.denominator;
+	
+	return rez;
 }
 
-Rational Rational::operator/(const Rational& other) {
-	return Rational(
+Rational& Rational::operator/=(const Rational& other) {
+	Rational rez(
 		this->numerator * other.denominator,
 		this->denominator * other.numerator
-	).reduce();
+	);
+	rez.reduce();
+	this->numerator = rez.numerator;
+	this->denominator = rez.denominator;
+
+	return rez;
+}
+
+double Rational::toDouble() {
+	return static_cast<double> (numerator) /
+		static_cast<double> (denominator);
 }
 
 bool operator==(const Rational& left, const Rational& right) {
@@ -64,17 +90,36 @@ bool operator==(const Rational& left, const Rational& right) {
 		return false;
 }
 
-double Rational::toDouble() {
-	return static_cast<double> (numerator) /
-		static_cast<double> (denominator);
-}
-
 Rational Rational::reduce() const {
 	int divisor = gcd(this->numerator, this->denominator);
 	return Rational{
 		this->numerator / divisor,
 		this->denominator / divisor
 	};
+}
+
+Rational operator+(const Rational& a, const Rational b) {
+	Rational temp(a);
+	temp += b;
+	return temp;
+}
+
+Rational operator-(const Rational& a, const Rational b) {
+	Rational temp(a);
+	temp -= b;
+	return temp;
+}
+
+Rational operator*(const Rational& a, const Rational b) {
+	Rational temp(a);
+	temp *= b;
+	return temp;
+}
+
+Rational operator/(const Rational& a, const Rational b) {
+	Rational temp(a);
+	temp /= b;
+	return temp;
 }
 
 int gcd(int a, int b) {

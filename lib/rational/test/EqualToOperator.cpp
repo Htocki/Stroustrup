@@ -3,7 +3,7 @@
 
 
 
-TEST(RationalTest, EqualOperatorTest) {
+TEST(RationalTest, EqualToOperatorTest) {
 	EXPECT_EQ(
 		operator==(Rational(1, 1), Rational(1, 1)),
 		true

@@ -4,30 +4,31 @@
 
 class Rational {
 public:
-	Rational();
-	Rational(int numerator, int denominator);
+    Rational();
+    explicit Rational(int numerator, int denominator);
 
-	Rational operator+(const Rational& other);
-	Rational operator-(const Rational& other);
-	Rational operator*(const Rational& other);
-	Rational operator/(const Rational& other);
+    Rational& operator+=(const Rational& other);
+    Rational& operator-=(const Rational& other);
+    Rational& operator*=(const Rational& other);
+    Rational& operator/=(const Rational& other);
 
-	double toDouble();
+    double toDouble();
 
-	friend bool operator==(const Rational& left, const Rational& right);
+    friend bool operator==(const Rational& lhs, const Rational& rhs);
 
 private:
-	Rational reduce() const;
+    Rational reduce() const;
 
-	int numerator = 1;
-	int denominator = 1;
+    int numerator = 1;
+    int denominator = 1;
 };
 
-
+Rational operator+(const Rational& lhs, const Rational rhs);
+Rational operator-(const Rational& lhs, const Rational rhs);
+Rational operator*(const Rational& lhs, const Rational rhs);
+Rational operator/(const Rational& lhs, const Rational rhs);
 
 // Calculates the Greatest Common Divisor.
-int gcd(int a, int b);
+int gcd(int lhs, int rhs);
 // Calculates the Least Common Multiple.
-int lcm(int a, int b);
-
-
+int lcm(int lhs, int rhs);
