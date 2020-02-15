@@ -1,5 +1,7 @@
 ## Windows
 .vs
 out
+.vscode
+build
 
 
