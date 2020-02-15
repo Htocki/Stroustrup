@@ -1,87 +1,85 @@
 #include "Rational.h"
 
 
+namespace {
+	int gcd(int a, int b);
+	int lcm(int a, int b);
+}
 
-Rational::Rational() {}
 
 Rational::Rational(int numerator, int denominator)
 	: numerator(numerator)
 	, denominator(denominator)
 {}
 
-Rational& Rational::operator+=(const Rational& other) {
-	Rational a = (*this).reduce();
-	Rational b = other.reduce();
+Rational Rational::operator+=(const Rational other) {
+	Rational a = (*this).Reduce();
+	Rational b = other.Reduce();
 
 	int multiple = lcm(a.denominator, b.denominator);
 
 	a.numerator *= multiple / a.denominator;
 	b.numerator *= multiple / b.denominator;
 
-	Rational rez(
+	Rational temp(
 		a.numerator + b.numerator,
 		multiple
 	);
+	temp.Reduce();
+	*this = temp;
 
-	rez.reduce();
-	this->numerator = rez.numerator;
-	this->denominator = rez.denominator;
-
-	return rez;
+	return *this;
 }
 
-Rational& Rational::operator-=(const Rational& other) {
-	Rational a = (*this).reduce();
-	Rational b = other.reduce();
+Rational Rational::operator-=(const Rational other) {
+	Rational a = (*this).Reduce();
+	Rational b = other.Reduce();
 
 	int multiple = lcm(a.denominator, b.denominator);
 
 	a.numerator *= multiple / a.denominator;
 	b.numerator *= multiple / b.denominator;
 
-	Rational rez(
+	Rational temp(
 		a.numerator - b.numerator,
 		multiple
 	);
-	rez.reduce();
-	this->numerator = rez.numerator;
-	this->denominator = rez.denominator;
-	
-	return rez;
+	temp.Reduce();
+	*this = temp;
+
+	return *this;
 }
 
-Rational& Rational::operator*=(const Rational& other) {
-	Rational rez(
+Rational Rational::operator*=(const Rational other) {
+	Rational temp(
 		this->numerator * other.numerator,
 		this->denominator * other.denominator
 	);
-	rez.reduce();
-	this->numerator = rez.numerator;
-	this->denominator = rez.denominator;
-	
-	return rez;
+	temp.Reduce();
+	this->numerator = temp.numerator;
+	this->denominator = temp.denominator;
+	return *this;
 }
 
-Rational& Rational::operator/=(const Rational& other) {
-	Rational rez(
+Rational Rational::operator/=(const Rational other) {
+	Rational temp(
 		this->numerator * other.denominator,
 		this->denominator * other.numerator
 	);
-	rez.reduce();
-	this->numerator = rez.numerator;
-	this->denominator = rez.denominator;
-
-	return rez;
+	temp.Reduce();
+	this->numerator = temp.numerator;
+	this->denominator = temp.denominator;
+	return *this;
 }
 
-double Rational::toDouble() {
-	return static_cast<double> (numerator) /
-		static_cast<double> (denominator);
+double Rational::ToDouble() {
+	return double{ numerator } /
+		double{ denominator };
 }
 
-bool operator==(const Rational& left, const Rational& right) {
-	Rational a = left.reduce();
-	Rational b = right.reduce();
+bool operator==(const Rational lhs, const Rational rhs) {
+	Rational a = lhs.Reduce();
+	Rational b = rhs.Reduce();
 
 	if (a.numerator == b.numerator &&
 		a.denominator == b.denominator)
@@ -90,48 +88,52 @@ bool operator==(const Rational& left, const Rational& right) {
 		return false;
 }
 
-Rational Rational::reduce() const {
-	int divisor = gcd(this->numerator, this->denominator);
+Rational Rational::Reduce() const {
+	int divisor = ::gcd(this->numerator, this->denominator);
 	return Rational{
 		this->numerator / divisor,
 		this->denominator / divisor
 	};
 }
 
-Rational operator+(const Rational& a, const Rational b) {
+Rational operator+(const Rational a, const Rational b) {
 	Rational temp(a);
 	temp += b;
 	return temp;
 }
 
-Rational operator-(const Rational& a, const Rational b) {
+Rational operator-(const Rational a, const Rational b) {
 	Rational temp(a);
 	temp -= b;
 	return temp;
 }
 
-Rational operator*(const Rational& a, const Rational b) {
+Rational operator*(const Rational a, const Rational b) {
 	Rational temp(a);
 	temp *= b;
 	return temp;
 }
 
-Rational operator/(const Rational& a, const Rational b) {
+Rational operator/(const Rational a, const Rational b) {
 	Rational temp(a);
 	temp /= b;
 	return temp;
 }
 
-int gcd(int a, int b) {
-	if (a == 0 || b == 0)
-		return 0;
-	else if (a == b)
-		return a;
-	else if (a > b)
-		return gcd(a - b, b);
-	else return gcd(a, b - a);
-}
+namespace {
+	// Calculates the Greatest Common Divisor.
+	int gcd(int a, int b) {
+		if (a == 0 || b == 0)
+			return 0;
+		else if (a == b)
+			return a;
+		else if (a > b)
+			return gcd(a - b, b);
+		else return gcd(a, b - a);
+	}
 
-int lcm(int a, int b) {
-	return a * b / gcd(a, b);
+	// Calculates the Least Common Multiple.
+	int lcm(int a, int b) {
+		return a * b / gcd(a, b);
+	}
 }
