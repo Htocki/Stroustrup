@@ -1,11 +1,9 @@
 #include "Rational.h"
 
-
 namespace {
 	int gcd(int a, int b);
 	int lcm(int a, int b);
 }
-
 
 Rational::Rational(int numerator, int denominator)
 	: numerator(numerator)
@@ -73,8 +71,8 @@ Rational Rational::operator/=(const Rational other) {
 }
 
 double Rational::ToDouble() {
-	return double{ numerator } /
-		double{ denominator };
+	return static_cast<double>(numerator) /
+		static_cast<double>(denominator);
 }
 
 bool operator==(const Rational lhs, const Rational rhs) {
