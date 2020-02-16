@@ -1,6 +1,6 @@
-#include "Rational.h"
-
 #include "gtest/gtest.h"
+
+#include "Rational.h"
 
 TEST(RationalTest, SubtractionOperatorTest) {
 	EXPECT_EQ(
