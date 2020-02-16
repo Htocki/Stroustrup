@@ -3,9 +3,6 @@
 
 #include "Namepairs.h"
 
-
-
-
 int main() {
 	Namepairs n;
 	n = Namepairs{
