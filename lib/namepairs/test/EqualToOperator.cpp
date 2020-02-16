@@ -3,7 +3,7 @@
 
 
 
-TEST(NamepairsTest, EqualOperatorTest) {
+TEST(NamepairsTest, EqualToOperatorTest) {
 	Namepairs one { 
 		{ "Hallo", 1 }, 
 		{ "My", 2 }, 

@@ -1,28 +1,6 @@
 cmake_minimum_required (VERSION 3.15)
 
-set (SOURCES 
-	"src/Main.cpp"
-	)
-
 project ("Straustrup")
-
-add_executable (${PROJECT_NAME} ${SOURCES})
-
-set_target_properties (${PROJECT_NAME}
-	PROPERTIES
-		set (CMAKE_CXX_STANDARD 17)
-		set (CMAKE_CXX_STANDARD_REQUIRED ON)
-	)
-
-target_link_libraries (${PROJECT_NAME} 
-	PUBLIC
-		book
-		date
-		library
-		namepairs
-		patron
-		rational
-	)
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(CTest)
