@@ -16,12 +16,11 @@ public:
 	);
 	void ReadNames();
 	void ReadAges();
-	void Print();
 	void Sort();
 
 	friend std::ostream& operator<<(
 		std::ostream& os, 
-		const Namepairs& pairs
+		const Namepairs& other
 	);
 
 	friend bool operator==(
@@ -35,6 +34,8 @@ public:
 	);
 
 private:
+	auto Print(std::ostream& out) const->std::ostream&;
+
 	std::vector<std::string> names;
 	std::vector<double> ages;
 };

@@ -17,7 +17,8 @@ int main() {
 	n.ReadAges();
 	n.ReadNames();
 	n.ReadAges();
-	n.Print();
+	
+	std::cout << n << std::endl;
 
 	std::string s;
 	std::getline(std::cin, s);

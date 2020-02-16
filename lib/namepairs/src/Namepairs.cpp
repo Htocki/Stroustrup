@@ -47,12 +47,11 @@ void Namepairs::ReadAges() {
 	}
 }
 
-void Namepairs::Print() {
-	std::cout << "Pairs (year: age): " << std::endl;
+auto Namepairs::Print(std::ostream& os) const -> std::ostream& {
 	for (auto i(0u); i < names.size(); ++i)
-		std::cout << "   " << names[i] << ": " << 
+		os << "   " << names[i] << ": " << 
 			ages[i] << "\n";
-	std::cout << std::endl;
+	return os;
 }
 
 void Namepairs::Sort() {
@@ -72,12 +71,8 @@ void Namepairs::Sort() {
 			}
 }
 
-std::ostream& operator<<(std::ostream& os, const Namepairs& pairs) {
-	for (auto i(0u); i < pairs.names.size(); ++i)
-		os	<< pairs.names.at(i) << ": " 
-			<< pairs.ages.at(i) << "\n";
-	std::cout << std::endl;
-	return os;
+std::ostream& operator<<(std::ostream& os, const Namepairs& other) {
+	return other.Print(os);
 }
 
 bool operator==(const Namepairs& lhs, const Namepairs& rhs) {
