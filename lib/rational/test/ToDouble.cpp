@@ -1,26 +1,25 @@
-#include "gtest/gtest.h"
 #include "Rational.h"
 
-
+#include "gtest/gtest.h"
 
 TEST(RationalTest, ToDoubleTest) {
 	EXPECT_EQ(
-		Rational(1, 1).toDouble(),
+		Rational(1, 1).ToDouble(),
 		1.
 	);
 
 	EXPECT_EQ(
-		Rational(1, 5).toDouble(),
+		Rational(1, 5).ToDouble(),
 		.2
 	);
 
 	EXPECT_EQ(
-		Rational(1, 3).toDouble(),
+		Rational(1, 3).ToDouble(),
 		1/3.
 	);
 
 	EXPECT_EQ(
-		Rational(22, 7).toDouble(),
+		Rational(22, 7).ToDouble(),
 		22/7.
 	);
 }

@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 3.15)
 set (SOURCES
 	"AdditionOperator.cpp"
 	"DivisionOperator.cpp"
-	"EqualOperator.cpp"
+	"EqualToOperator.cpp"
 	"Main.cpp"
 	"MultiplicationOperator.cpp"
 	"SubtractionOperator.cpp"
