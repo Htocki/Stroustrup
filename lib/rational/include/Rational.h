@@ -16,7 +16,7 @@ public:
 
 	friend std::ostream& operator<<(
 		std::ostream& os,
-		const Rational
+		const Rational other
 	);
 
 	friend bool operator==(const Rational lhs, const Rational rhs);
