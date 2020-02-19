@@ -1,8 +1,21 @@
 #include "Rational.h"
 
 namespace {
-	int Gcd(int a, int b);
-	int Lcm(int a, int b);
+	// Calculates the Greatest Common Divisor.
+	int Gcd(int a, int b) {
+		if (a == 0 || b == 0)
+			return 0;
+		else if (a == b)
+			return a;
+		else if (a > b)
+			return Gcd(a - b, b);
+		else return Gcd(a, b - a);
+	}
+
+	// Calculates the Least Common Multiple.
+	int Lcm(int a, int b) {
+		return a * b / Gcd(a, b);
+	}
 }
 
 Rational::Rational(int numerator, int denominator)
@@ -126,22 +139,4 @@ Rational operator/(const Rational a, const Rational b) {
 	Rational temp(a);
 	temp /= b;
 	return temp;
-}
-
-namespace {
-	// Calculates the Greatest Common Divisor.
-	int Gcd(int a, int b) {
-		if (a == 0 || b == 0)
-			return 0;
-		else if (a == b)
-			return a;
-		else if (a > b)
-			return Gcd(a - b, b);
-		else return Gcd(a, b - a);
-	}
-
-	// Calculates the Least Common Multiple.
-	int Lcm(int a, int b) {
-		return a * b / Gcd(a, b);
-	}
 }
