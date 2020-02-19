@@ -10,7 +10,7 @@ Rational::Rational(int numerator, int denominator)
 	, denominator(denominator)
 {}
 
-Rational Rational::operator+=(const Rational other) {
+Rational& Rational::operator+=(const Rational other) {
 	Rational a = (*this).Reduce();
 	Rational b = other.Reduce();
 	
@@ -27,7 +27,7 @@ Rational Rational::operator+=(const Rational other) {
 	return *this;
 }
 
-Rational Rational::operator-=(const Rational other) {
+Rational& Rational::operator-=(const Rational other) {
 	Rational a = (*this).Reduce();
 	Rational b = other.Reduce();
 
@@ -45,7 +45,7 @@ Rational Rational::operator-=(const Rational other) {
 	return *this;
 }
 
-Rational Rational::operator*=(const Rational other) {
+Rational& Rational::operator*=(const Rational other) {
 	Rational temp(
 		this->numerator * other.numerator,
 		this->denominator * other.denominator
@@ -56,7 +56,7 @@ Rational Rational::operator*=(const Rational other) {
 	return *this;
 }
 
-Rational Rational::operator/=(const Rational other) {
+Rational& Rational::operator/=(const Rational other) {
 	Rational temp(
 		this->numerator * other.denominator,
 		this->denominator * other.numerator

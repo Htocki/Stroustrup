@@ -7,10 +7,10 @@ public:
 	Rational() = default;
 	Rational(int numerator, int denominator);
 
-	Rational operator+=(const Rational other);
-	Rational operator-=(const Rational other);
-	Rational operator*=(const Rational other);
-	Rational operator/=(const Rational other);
+	Rational& operator+=(const Rational other);
+	Rational& operator-=(const Rational other);
+	Rational& operator*=(const Rational other);
+	Rational& operator/=(const Rational other);
 
 	double ToDouble();
 
