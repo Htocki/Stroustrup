@@ -30,5 +30,4 @@ target_include_directories(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 	)
 
-add_subdirectory ("bin")
 add_subdirectory ("test")

@@ -1,11 +1,12 @@
 #pragma once
 
-#include <iostream>
+#include <cstdint>
+#include <iosfwd>
 
 class Rational {
 public:
 	Rational() = default;
-	Rational(int numerator, int denominator);
+	Rational(std::int64_t numerator, std::int64_t denominator);
 
 	Rational& operator+=(const Rational other);
 	Rational& operator-=(const Rational other);
@@ -24,10 +25,10 @@ public:
 
 private:
 	auto Print(std::ostream& os) const ->std::ostream&;
-	Rational Reduce() const;
+	void Reduce();
 
-	int numerator = { 1 };
-	int denominator = { 1 };
+	std::int64_t numerator_ = { 1 };
+	std::int64_t denominator_ = { 1 };
 };
 
 Rational operator+(const Rational lhs, const Rational rhs);
