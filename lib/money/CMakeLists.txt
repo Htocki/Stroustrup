@@ -1,14 +1,14 @@
 cmake_minimum_required (VERSION 3.15)
 
 set (INCLUDE
-	"include/Converter.h"
+	"include/Conversions.h"
 	"include/Currency.h"
 	"include/Money.h"
 	)
 
 set (SOURCES
+	"src/Conversions.cpp"
 	"src/Money.cpp"
-	"src/Converter.cpp"
 	)
 
 project ("money")
@@ -33,5 +33,4 @@ target_include_directories(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 	)
 
-add_subdirectory ("bin")
 add_subdirectory ("test")

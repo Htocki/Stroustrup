@@ -1,17 +1,21 @@
 #include "Money.h"
 
+#include <iostream>
+
+#include "Conversions.h"
+
 Money::Money(double amount, Currency currency)
-	: USCAmount(converter.ConvertToUSC(amount, currency))
-	, currency(currency)
+	: USCAmount_(ConvertToUSC(amount, currency))
+	, currency_(currency)
 {}
 
-Money Money::operator+=(const Money other) {
-	this->USCAmount += other.USCAmount;
+Money& Money::operator+=(const Money other) {
+	USCAmount_ += other.USCAmount_;
 	return *this;
 }
 
-Money Money::operator-=(const Money other) {
-	this->USCAmount -= other.USCAmount;
+Money& Money::operator-=(const Money other) {
+	USCAmount_ -= other.USCAmount_;
 	return *this;
 }
 
@@ -23,37 +27,37 @@ std::istream& operator>>(std::istream& is, Money& other) {
 	std::cout << "Input currency (USD, DKK): ";
 	std::string currency; 
 	std::cin >> currency;
-	if (!(currency == "USD" || currency == "DKK"))
+	if (!(currency == "USD" || currency == "DKK")) {
 		throw Money::IncorrectInput{};
+	}
 	
 	std::cout << "Input amount: ";
 	double amount; 
-	if (!(std::cin >> amount)) 
+	if (!(std::cin >> amount)) {
 		throw Money::IncorrectInput{};
+	}
 
 	if (currency == "USD") {
-		other.currency = Currency::USD;
-		other.USCAmount = other.converter.ConvertToUSC(
+		other.currency_ = Currency::USD;
+		other.USCAmount_ = ConvertToUSC(
 			amount,
-			other.currency
+			other.currency_
 		);
 	}
 	if (currency == "DKK") {
-		other.currency = Currency::DKK;
-		other.USCAmount = other.converter.ConvertToUSC(
+		other.currency_ = Currency::DKK;
+		other.USCAmount_ = ConvertToUSC(
 			amount,
-			other.currency
+			other.currency_
 		);
 	}
 	return is;
 }
 
 bool operator==(const Money lhs, const Money rhs) {
-	if (lhs.USCAmount == lhs.USCAmount &&
-		lhs.currency == lhs.currency)
-		return true;
-	else
-		return false;
+	return
+		lhs.USCAmount_ == lhs.USCAmount_ &&
+		lhs.currency_ == lhs.currency_;
 }
 
 bool operator!=(const Money lhs, const Money rhs) {
@@ -61,25 +65,27 @@ bool operator!=(const Money lhs, const Money rhs) {
 }
 
 auto Money::Print(std::ostream& os) const -> std::ostream& {
-	switch (currency) {
+	switch (currency_) {
 	case Currency::USD:
-		os << "USD " << converter.ConvertFromUSCToUSD(USCAmount);
+		os << "USD " << ConvertFromUSCToUSD(
+			USCAmount_);
 		break;
 	case Currency::DKK:
-		os << "DKK " << converter.ConvertFromUSCToDKK(USCAmount);
+		os << "DKK " << ConvertFromUSCToDKK(
+			USCAmount_);
 		break;
 	}
 	return os;
 }
 
 Money operator+(const Money lhs, const Money rhs) {
-	auto temp(lhs);
+	Money temp(lhs);
 	temp += rhs;
 	return temp;
 }
 
 Money operator-(const Money lhs, const Money rhs) {
-	auto temp(rhs);
+	Money temp(rhs);
 	temp -= rhs;
 	return temp;
 }
