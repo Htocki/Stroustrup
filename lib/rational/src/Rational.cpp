@@ -5,7 +5,7 @@
 namespace {
 	// Calculates the Greatest Common Divisor.
 	std::int64_t Gcd(std::int64_t a, std::int64_t b) {
-		if (a == 0 || b == 0)
+		if (a == 0 || b == 0) 
 			return 0;
 		else if (a == b)
 			return a;
@@ -113,10 +113,8 @@ auto Rational::Print(std::ostream& os) const->std::ostream& {
 
 void Rational::Reduce() {
 	const auto divisor = Gcd(numerator_, denominator_);
-	Rational temp = *this;
-	temp.numerator_ /= divisor;
-	temp.denominator_ /= divisor;
-	*this = temp;
+	numerator_ /= divisor;
+	denominator_ /= divisor;
 }
 
 Rational operator+(const Rational lhs, const Rational rhs) {
