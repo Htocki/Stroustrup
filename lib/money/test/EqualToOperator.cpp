@@ -12,9 +12,9 @@ TEST(MoneyTest, EqualToOperatorTest) {
 
 	EXPECT_EQ(
 		operator==(
-			Money{ 1.433, Currency::USD },
-			Money{ 1.430, Currency::USD }),
-		true
+			Money{ 1.433, Currency::USD }, 
+			Money{ 21.40, Currency::DKK }),
+		false
 	);
 
 	EXPECT_EQ(

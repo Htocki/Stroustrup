@@ -2,7 +2,9 @@ cmake_minimum_required (VERSION 3.15)
 
 set (SOURCES
 	"EqualToOperator.cpp"
+	"InputOperator.cpp"
 	"Main.cpp"
+	"OutputOperator.cpp"
 	)
 
 project ("money-test")

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <iosfwd>
-#include <string>
 
 #include <Currency.h>
 
