@@ -1,7 +1,13 @@
 cmake_minimum_required (VERSION 3.15)
 
 set (SOURCES
+	"ConvertFromUSCToDKK.cpp"
+	"ConvertFromUSCToUSD.cpp"
+	"ConvertToUSC.cpp"
+	"EqualToOperator.cpp"
+	"InputOperator.cpp"
 	"Main.cpp"
+	"OutputOperator.cpp"
 	)
 
 project ("money-test")
