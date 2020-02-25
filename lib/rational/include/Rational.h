@@ -1,33 +1,37 @@
 #pragma once
 
-
+#include <cstdint>
+#include <iosfwd>
 
 class Rational {
 public:
-	Rational();
-	Rational(int numerator, int denominator);
+	Rational() = default;
+	Rational(std::int64_t numerator, std::int64_t denominator);
 
-	Rational operator+(const Rational& other);
-	Rational operator-(const Rational& other);
-	Rational operator*(const Rational& other);
-	Rational operator/(const Rational& other);
+	Rational& operator+=(const Rational other);
+	Rational& operator-=(const Rational other);
+	Rational& operator*=(const Rational other);
+	Rational& operator/=(const Rational other);
 
-	double toDouble();
+	double ToDouble();
 
-	friend bool operator==(const Rational& left, const Rational& right);
+	friend std::ostream& operator<<(
+		std::ostream& os,
+		const Rational other
+	);
+
+	friend bool operator==(const Rational lhs, const Rational rhs);
+	friend bool operator!=(const Rational lhs, const Rational rhs);
 
 private:
-	Rational reduce() const;
+	auto Print(std::ostream& os) const ->std::ostream&;
+	void Reduce();
 
-	int numerator = 1;
-	int denominator = 1;
+	std::int64_t numerator_ = { 1 };
+	std::int64_t denominator_ = { 1 };
 };
 
-
-
-// Calculates the Greatest Common Divisor.
-int gcd(int a, int b);
-// Calculates the Least Common Multiple.
-int lcm(int a, int b);
-
-
+Rational operator+(const Rational lhs, const Rational rhs);
+Rational operator-(const Rational lhs, const Rational rhs);
+Rational operator*(const Rational lhs, const Rational rhs);
+Rational operator/(const Rational lhs, const Rational rhs);

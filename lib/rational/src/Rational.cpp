@@ -1,92 +1,142 @@
 #include "Rational.h"
 
+#include <iostream>
 
+namespace {
+	// Calculates the Greatest Common Divisor.
+	std::int64_t Gcd(std::int64_t a, std::int64_t b) {
+		if (a == 0 || b == 0) 
+			return 0;
+		else if (a == b)
+			return a;
+		else if (a > b)
+			return Gcd(a - b, b);
+		else return Gcd(a, b - a);
+	}
 
-Rational::Rational() {}
+	// Calculates the Least Common Multiple.
+	std::int64_t Lcm(std::int64_t a, std::int64_t b) {
+		return a * b / Gcd(a, b);
+	}
+}
 
-Rational::Rational(int numerator, int denominator)
-	: numerator(numerator)
-	, denominator(denominator)
-{}
+Rational::Rational(
+	std::int64_t numerator, 
+	std::int64_t denominator
+)
+	: numerator_(numerator)
+	, denominator_(denominator)
+{
+	this->Reduce();
+}
 
-Rational Rational::operator+(const Rational& other) {
-	Rational a = (*this).reduce();
-	Rational b = other.reduce();
+Rational& Rational::operator+=(const Rational other) {
+	Rational a = *this;
+	Rational b = other;
 	
-	int multiple = lcm(a.denominator, b.denominator);
+	const auto multiple = Lcm(denominator_, b.denominator_);
+	a.numerator_ *= multiple / a.denominator_;
+	b.numerator_ *= multiple / b.denominator_;
 
-	a.numerator *= multiple / a.denominator;
-	b.numerator *= multiple / b.denominator;
-
-	return Rational(
-		a.numerator + b.numerator,
+	Rational temp(
+		a.numerator_ + b.numerator_,
 		multiple
-	).reduce();
+	);
+	temp.Reduce();
+	*this = temp;
+	return *this;
 }
 
-Rational Rational::operator-(const Rational& other) {
-	Rational a = (*this).reduce();
-	Rational b = other.reduce();
+Rational& Rational::operator-=(const Rational other) {
+	Rational a = *this;
+	Rational b = other;
+	
+	const auto multiple = Lcm(a.denominator_, b.denominator_);
 
-	int multiple = lcm(a.denominator, b.denominator);
+	a.numerator_ *= multiple / a.denominator_;
+	b.numerator_ *= multiple / b.denominator_;
 
-	a.numerator *= multiple / a.denominator;
-	b.numerator *= multiple / b.denominator;
-
-	return Rational(
-		a.numerator - b.numerator,
+	Rational temp(
+		a.numerator_ - b.numerator_,
 		multiple
-	).reduce();
+	);
+	temp.Reduce();
+	*this = temp;
+	return *this;
 }
 
-Rational Rational::operator*(const Rational& other) {
-	return Rational(
-		this->numerator * other.numerator,
-		this->denominator * other.denominator
-	).reduce();
+Rational& Rational::operator*=(const Rational other) {
+	Rational temp(
+		numerator_ * other.numerator_,
+		denominator_ * other.denominator_
+	);
+	temp.Reduce();
+	numerator_ = temp.numerator_;
+	denominator_ = temp.denominator_;
+	return *this;
 }
 
-Rational Rational::operator/(const Rational& other) {
-	return Rational(
-		this->numerator * other.denominator,
-		this->denominator * other.numerator
-	).reduce();
+Rational& Rational::operator/=(const Rational other) {
+	Rational temp(
+		numerator_ * other.denominator_,
+		denominator_ * other.numerator_
+	);
+	temp.Reduce();
+	numerator_ = temp.numerator_;
+	denominator_ = temp.denominator_;
+	return *this;
 }
 
-bool operator==(const Rational& left, const Rational& right) {
-	Rational a = left.reduce();
-	Rational b = right.reduce();
-
-	if (a.numerator == b.numerator &&
-		a.denominator == b.denominator)
-		return true;
-	else
-		return false;
+double Rational::ToDouble() {
+	return double(numerator_) /
+		denominator_;
 }
 
-double Rational::toDouble() {
-	return static_cast<double> (numerator) /
-		static_cast<double> (denominator);
+std::ostream& operator<<(std::ostream& os, const Rational other) {
+	return other.Print(os);
 }
 
-Rational Rational::reduce() const {
-	int divisor = gcd(this->numerator, this->denominator);
-	return Rational{
-		this->numerator / divisor,
-		this->denominator / divisor
-	};
+bool operator==(const Rational lhs, const Rational rhs) {
+	return 
+		rhs.numerator_ == lhs.numerator_ &&
+		rhs.denominator_ == lhs.denominator_;
 }
 
-int gcd(int a, int b) {
-	if (a == 0 || b == 0)
-		return 0;
-	else if (a == b)
-		return a;
-	else if (a > b)
-		return gcd(a - b, b);
-	else return gcd(a, b - a);
+bool operator!=(const Rational lhs, const Rational rhs) {
+	return !operator==(lhs, rhs);
 }
 
-int lcm(int a, int b) {
-	return a * b / gcd(a, b);
+auto Rational::Print(std::ostream& os) const->std::ostream& {
+	os << numerator_ << "/" << denominator_;
+	return os;
+}
+
+void Rational::Reduce() {
+	const auto divisor = Gcd(numerator_, denominator_);
+	numerator_ /= divisor;
+	denominator_ /= divisor;
+}
+
+Rational operator+(const Rational lhs, const Rational rhs) {
+	Rational temp(lhs);
+	temp += rhs;
+	return temp;
+}
+
+Rational operator-(const Rational lhs, const Rational rhs) {
+	Rational temp(lhs);
+	temp -= rhs;
+	return temp;
+}
+
+Rational operator*(const Rational lhs, const Rational rhs) {
+	Rational temp(lhs);
+	temp *= rhs;
+	return temp;
+}
+
+Rational operator/(const Rational lhs, const Rational rhs) {
+	Rational temp(lhs);
+	temp /= rhs;
+	return temp;
 }
