@@ -27,3 +27,6 @@ add_subdirectory ("lib/money")
 add_subdirectory ("lib/namepairs")
 add_subdirectory ("lib/patron")
 add_subdirectory ("lib/rational")
+add_subdirectory ("lib/sum")
+
+add_subdirectory ("bin/10_1")
