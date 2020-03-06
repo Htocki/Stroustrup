@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-constexpr std::uint64_t number_of_readings = { 5 };
+constexpr std::uint64_t number_of_readings = { 50 };
 
 struct Reading {
     int hour; // [0, 23].
