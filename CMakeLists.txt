@@ -6,6 +6,8 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(CTest)
 endif()
 
+enable_testing()
+
 include (FetchContent)
 
 FetchContent_Declare(
