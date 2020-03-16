@@ -22,14 +22,14 @@ int main(int argc, char* argv[]) {
         new_file.is_open()) 
     {
         std::vector<std::string> words;
-        std::string s;
+        std::string word;
 
-        while (file_one >> s) {
-            words.push_back(s);
+        while (file_one >> word) {
+            words.push_back(word);
         }
 
-        while (file_two >> s) {
-            words.push_back(s);
+        while (file_two >> word) {
+            words.push_back(word);
         }
 
         std::sort(words.begin(), words.end());
