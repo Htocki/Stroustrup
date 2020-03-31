@@ -22,23 +22,24 @@ int main(int argc, char* argv[]) {
     std::ofstream new_file {"NewFile.txt", std::ios_base::ate};
 
     if (file_one.is_open() && file_two.is_open() && new_file.is_open()) {
-      for (char c {' '}; file_one;) {
-        file_one.get(c);
-        new_file.put(c);
-      }
-
-      for (char c {' '}; file_two;) {
-        file_two.get(c);
-        new_file.put(c);
-      }
+      std::stringstream buffer;
+      char c {' '};
+      while (file_one.get(c)) { buffer.put(c); }
+      while (file_two.get(c)) { buffer.put(c); }
+      while (buffer.get(c)) { new_file.put(c); }
     } else {
-      std::cerr << "An error occurred while opening files." << std::endl;
+      throw std::ios_base::failure {
+        "An error occurred while opening files."
+      };
     }
-  } catch (std::exception& e) {
+  } catch (std::invalid_argument& e) {
       std::cerr << e.what() << std::endl;
+  } catch (std::ios_base::failure& e) {
+      std::cerr
+        << "Caught an ios_base::failure.\n"
+        << "Explanatory string: " << e.what() << '\n'
+        << "Error code: " << e.code() << std::endl;
   }
-
-  std::cin.get();  // Pause.
 }
 
 
