@@ -2,102 +2,89 @@
 #include <exception>
 #include <iostream>
 #include <fstream>
+#include <numeric>
 #include <string>
 #include <vector>
 
 struct Reading {
-    int hour;
-    double temperature;
-    char scale;
+  int hour { 0 };
+  char scale { 'c' };
+  double temperature { 0 };
 };
 
-auto ConvertCelsiusToFahrenheit(double temperature) ->
-double {
-    return (9. / 5) * temperature + 32;
+double operator+(double temperature, Reading read) {
+  return read.temperature + temperature;
 }
 
-auto ReadFromFile(const std::string& fileName) ->
-std::vector<Reading> {
-    std::vector<Reading> readings;
-    std::ifstream ifs(fileName);
+double ConvertCelsiusToFahrenheit(double temperature) {
+  return (9. / 5) * temperature + 32;
+}
 
-    if (ifs.is_open()) {
-        Reading r;
-        while (!ifs.eof()) {
-            ifs >> r.hour >> r.temperature >> r.scale;
-            r.temperature = ConvertCelsiusToFahrenheit(r.temperature);
-            r.scale = 'f';
-            readings.push_back(r);
-        }
-    }
-    else {
-        throw std::exception{ "Invalid file specified." };
-    }
+std::vector<Reading> ReadFromFile(const std::string& fileName) {
+  std::vector<Reading> readings;
+  std::ifstream file(fileName);
 
-    return readings;
+  if (file.is_open()) {
+    for (Reading r; !file.eof();) {
+      file >> r.hour >> r.temperature >> r.scale;
+      r.temperature = ConvertCelsiusToFahrenheit(r.temperature);
+      r.scale = 'f';
+      readings.push_back(r);
+    }
+  } else {
+    throw std::invalid_argument{ "Invalid file specified." };
+  }
+  return readings;
 }
 
 void Print(const std::vector<Reading>& readings) {
-    for (const auto& r : readings) {
-        std::cout 
-            << r.hour << " " 
-            << r.temperature << " " 
-            << r.scale << std::endl;
-    }
-    std::cout << std::endl;
+  for (const auto& r : readings) {
+    std::cout
+      << r.hour << " "
+      << r.temperature << " "
+      << r.scale << "\n";
+  }
+  std::cout << std::endl;
 }
 
-auto AverageTemperature(const std::vector<Reading>& readings) ->
-double {
-    double sum{ 0 };
-    for (const auto& r : readings) {
-        sum += r.temperature;
-    }
-    return sum / readings.size();
+double AverageTemperature(const std::vector<Reading> readings) {
+  return std::accumulate(readings.begin(), readings.end(), 0) /
+    readings.size();
 }
 
-auto TemperatureMedian(const std::vector<Reading>& readings) ->
-double {
-    std::vector<double> temperatures;
+double TemperatureMedian(const std::vector<Reading>& readings) {
+  std::vector<double> temperatures;
 
-    for (const auto& r : readings) {
-        temperatures.push_back(r.temperature);
-    }
+  for (const auto& r : readings) {
+    temperatures.push_back(r.temperature);
+  }
 
-    std::sort(temperatures.begin(), temperatures.end());
+  std::sort(temperatures.begin(), temperatures.end());
 
-    if (temperatures.size() % 2 == 0) {
-        return (temperatures.at(temperatures.size() / 2)
-            + temperatures.at(temperatures.size() / 2 - 1)) / 2;
-    }
-    else {
-        return temperatures.at(temperatures.size() / 2);
-    }
+  if (temperatures.size() % 2 == 0) {
+    return (temperatures.at(temperatures.size() / 2) +
+      temperatures.at(temperatures.size() / 2 - 1)) / 2;
+  } else {
+    return temperatures.at(temperatures.size() / 2);
+  }
 }
 
 int main() {
-    try {
-        std::vector<Reading>& readings = {
-            ReadFromFile("files/Raw_temps.txt")
-        };
-
-        Print(readings);
-
-        std::cout << "Average temperature: "
-            << AverageTemperature(readings)
-            << std::endl;
-
-        std::cout << "TemperatureMedian: "
-            << TemperatureMedian(readings)
-            << std::endl;
-
+  try {
+    std::vector<Reading> readings = ReadFromFile("files/Raw_temps.txt");
+    Print(readings);
+    std::cout << "Average temperature: "
+      << AverageTemperature(readings)
+      << "\n"
+      << "TemperatureMedian: "
+      << TemperatureMedian(readings)
+      << std::endl;
     }
-    catch (std::exception & e) {
-        std::cout << e.what() << std::endl;
+    catch (std::invalid_argument& e) {
+      std::cout << e.what() << std::endl;
     }
 
-    // Pause
-    char c; std::cin.get(c);
+    std::cin.get();  // Pause.
 
     return 0;
 }

@@ -4,91 +4,116 @@
 #include <iostream>
 #include <vector>
 
-constexpr std::uint64_t number_of_readings = { 5 };
-
 struct Reading {
-    int hour;
-    double temperature;
-    char scale;
+  int hour { 0 };
+  char scale { 'c' };
+  double temperature { 0 };
 };
 
-Reading InstanceReading() {
-    std::cin.exceptions(std::ios::failbit);
-    Reading r;
+static double min_limit { 0 };
 
-    std::cout << "Input hour [0, 23]: ";
-    if (std::cin >> r.hour) {
-        if (r.hour < 0 || r.hour > 23) {
-            std::cerr <<
-                "Input is incorrect.\n\n"
-                "Try again:" << std::endl;
-            return InstanceReading();
-        }
+char GetScale() {
+  std::cin.exceptions(std::ios::failbit);
+  std::cout << "Input scale (Fahrenheit[f] or (Celsius[c]): ";
+  if (char scale {' '}; std::cin >> scale) {
+    switch (scale) {
+    case 'f' :
+      min_limit = -459.67;
+      return scale;
+    case 'c':
+      min_limit = -273.15;
+      return scale;
+    default:
+      throw std::invalid_argument {
+        "The scale is entered incorrectly."
+      };
     }
-
-    struct Temperature_limit {
-        double min = {0};
-    } temperature_limit;
-
-    std::cout << "Input scale (Fahrenheit[f] or (Celsius[c]): ";
-    if (std::cin >> r.scale) {
-        switch (r.scale) {
-        case 'f' :
-            temperature_limit.min = -459.67;
-            break;
-        case 'c':
-            temperature_limit.min = -273.15;
-            break;
-        default: 
-            std::cerr <<
-                "Input is incorrect.\n\n"
-                "Try again:" << std::endl;
-            return InstanceReading();
-        }
-    }
-
-    std::cout << "Input temperature: ";
-    if (std::cin >> r.temperature) {
-        if (r.temperature < temperature_limit.min) {
-            std::cerr <<
-                "Input is incorrect.\n\n"
-                "Try again:" << std::endl;
-            return InstanceReading();
-        }
-    }
-
-    return r;
+  }
 }
 
+int GetHour() {
+  std::cout << "Input hour [0, 23]: ";
+  if (int hour { -1 }; std::cin >> hour) {
+    if (hour < 0 || hour > 23) {
+      throw std::invalid_argument {
+        "The hour you entered is incorrect."
+      };
+    }
+  }
+}
+
+double GetTemperature() {
+  std::cout << "Input temperature: ";
+  if (double temperature { -1000 }; std::cin >> temperature) {
+    if (temperature < min_limit) {
+      std::invalid_argument {
+        "Incorrect temperature entered."
+      };
+    }
+  }
+}
+
+Reading InstanceReading() {
+  std::cin.exceptions(std::ios::failbit);
+  Reading r;
+  try {
+    r.scale = GetScale();
+    r.temperature = GetTemperature();
+    r.hour = GetHour();
+  }
+  catch (std::invalid_argument& e) {
+    std::cerr << e.what() << "\n\n";
+    std::cout <<
+      "An error occurred while entering the entry.\n"
+      "Want to repeat again? (All entries entered up\n"
+      "to this point will not be entered into the file.)\n"
+      "Enter [y]es or [n]ot: ";
+
+    if (char decision { ' ' }; std::cin >> decision) {
+      switch (decision) {
+      case 'y':
+        return InstanceReading();
+      case 'n':
+        throw std::invalid_argument { "Bye Bye." };
+      default:
+        throw std::invalid_argument { "I take it as not. Bye Bye." };
+      }
+    }
+  }
+  return r;
+}
+
+constexpr std::uint64_t number_of_readings { 50 };
+
 int main() {
-    try {
-        std::vector<Reading> temps;
-        std::ofstream ofs("Raw_temps.txt");
-        if (ofs.is_open()) {
-            while (temps.size() != number_of_readings) {
-                temps.push_back(InstanceReading());
-            }
+  try {
+    std::vector<Reading> readings;
+    readings.resize(number_of_readings);
+    std::ofstream file("Raw_temps.txt");
 
-            for (auto r : temps) {
-                ofs 
-                    << r.hour 
-                    << " " 
-                    << r.temperature
-                    << " "
-                    << r.scale
-                    << "\n";
-            }
-        }
-        else {
-            throw std::exception{ "Error opening file." };
-        }
-    }
-    catch (std::ios_base::failure e) {
-        std::cerr << "Critical input error." << std::endl;
-    }
-    catch (std::exception e) {
-        std::cerr << e.what() << std::endl;
-    }
+    if (file.is_open()) {
+      for (auto& r : readings) {
+        r = InstanceReading();
+      }
 
-    return 0;
+      for (const auto& r : readings) {
+        file
+          << r.hour << " "
+          << r.temperature << " "
+          << r.scale << "\n";
+      }
+    } else {
+      throw std::invalid_argument{ "Error opening file." };
+    }
+  }
+  catch (std::ios_base::failure& e) {
+    std::cerr << e.what() << std::endl;
+  }
+  catch (std::invalid_argument& e) {
+    std::cerr << e.what() << std::endl;
+  }
+
+  std::cin.get();  // Pause.
+
+  return 0;
 }
