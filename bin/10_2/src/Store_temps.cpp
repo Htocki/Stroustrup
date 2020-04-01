@@ -4,60 +4,87 @@
 #include <iostream>
 #include <vector>
 
-constexpr std::uint64_t number_of_readings = { 50 };
-
 struct Reading {
-  int hour;  // [0, 23].
-  double temperature;  // Fahrenheit.
+  int hour { 0 };  // [0, 23].
+  double temperature { 0 };  // Fahrenheit.
 };
+
+std::ostream& operator<< (std::ostream& os, const Reading& r) {
+  return os << r.hour << " " << r.temperature << "\n";
+}
+
+int GetHour() {
+  std::cout << "Input hour [0, 23]: ";
+  if (int hour { -1 }; std::cin >> hour) {
+    if (hour < 0 || hour > 23) {
+      throw std::invalid_argument {
+        "The hour you entered is incorrect."
+      };
+    }
+  }
+}
+
+constexpr double fahrenheit_temperature_minimun { -459.67 };
+
+double GetTemperature() {
+  std::cout << "Input temperature: ";
+  if (double temperature { -1000 }; std::cin >> temperature) {
+    if (temperature < fahrenheit_temperature_minimun) {
+      std::invalid_argument {
+        "Incorrect temperature entered."
+      };
+    }
+  }
+}
 
 Reading InstanceReading() {
   std::cin.exceptions(std::ios::failbit);
   Reading r;
+  try {
+    r.hour = GetHour();
+    r.temperature = GetTemperature();
+  }
+  catch (std::invalid_argument& e) {
+    std::cerr << e.what() << "\n";
+    std::cout <<
+      "An error occurred while entering the entry.\n"
+      "Want to repeat again? (All entries entered up\n"
+      "to this point will not be entered into the file.)\n"
+      "Enter [y]es or [n]ot: ";
 
-  std::cout << "Input hour [0, 23]: ";
-  if (std::cin >> r.hour) {
-    if (r.hour < 0 || r.hour > 23) {
-      std::cerr <<
-        "Input is incorrect.\n\n"
-        "Try again:" << std::endl;
-      return InstanceReading();
+    if (char decision { ' ' }; std::cin >> decision) {
+      switch (decision) {
+      case 'y':
+        return InstanceReading();
+      case 'n':
+        throw std::invalid_argument { "Bye Bye." };
+      default:
+        throw std::invalid_argument { "I take it as not. Bye Bye." };
+      }
     }
   }
-
-  std::cout << "Input temperature (Fahrenheit): ";
-  if (std::cin >> r.temperature) {
-    if (r.temperature < -1000 || r.temperature > 1000) {
-      std::cerr <<
-        "Input is incorrect.\n\n"
-        "Try again:" << std::endl;
-      return InstanceReading();
-    }
-  }
-
   return r;
 }
 
+constexpr std::uint64_t number_of_readings = { 50 };
+
 int main() {
   try {
-    std::vector<Reading> temps;
-    std::ofstream ofs("Raw_temps.txt");
+    std::vector<Reading> readings;
+    readings.resize(number_of_readings);
+    std::ofstream file("Raw_temps.txt");
 
-    if (ofs.is_open()) {
-      while (temps.size() != number_of_readings) {
-        temps.push_back(InstanceReading());
-      }
-      for (auto r : temps) {
-        ofs << r.hour << " " << r.temperature << "\n";
-      }
+    if (file.is_open()) {
+      for (auto& r : readings) { r = InstanceReading(); }
+      for (const auto& r : readings) { file << r; }
     } else {
       throw std::invalid_argument{ "Invalid file specified." };
     }
   }
-  catch (std::ios_base::failure e) {
-    std::cerr << "Critical input error." << std::endl;
+  catch (std::ios_base::failure& e) {
+    std::cerr << e.what() << std::endl;
   }
-  catch (std::exception e) {
+  catch (std::invalid_argument& e) {
     std::cerr << e.what() << std::endl;
   }
 
