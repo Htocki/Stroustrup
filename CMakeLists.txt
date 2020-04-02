@@ -2,6 +2,10 @@ cmake_minimum_required (VERSION 3.15)
 
 project ("Straustrup")
 
+if(CMAKE_COMPILER_IS_GNUCXX)
+    add_definitions(-Wall -pedantic -std=gnu++2a)
+endif()
+
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(CTest)
 endif()
@@ -11,9 +15,9 @@ enable_testing()
 include (FetchContent)
 
 FetchContent_Declare(
-	googletest
-	GIT_REPOSITORY https://github.com/google/googletest.git
-	GIT_TAG        master
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG        master
 )
 
 FetchContent_GetProperties(googletest)

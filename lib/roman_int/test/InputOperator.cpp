@@ -1,13 +1,14 @@
 #include <sstream>
+#include <iostream>
 
 #include "gtest/gtest.h"
 
-#include "Roman_int.h"
+#include "RomanInt.h"
 
-TEST(Roman_intTest, InputOperatorTest) {
-    std::stringstream ss;
-    Roman_int roman;
-    ss << "XLXX";
-    ss >> roman;
-    EXPECT_EQ(roman, Roman_int("XLXX"));
+TEST(RomanIntTest, InputOperatorTest) {
+  std::stringstream ss;
+  RomanInt roman;
+  ss << "XLXX";
+  ss >> roman;
+  EXPECT_EQ(roman, RomanInt("XLXX"));
 }

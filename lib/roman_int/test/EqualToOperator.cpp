@@ -1,30 +1,11 @@
 #include "gtest/gtest.h"
 
-#include "Roman_int.h"
+#include "RomanInt.h"
 
-TEST(Roman_intTest, EqualToOperatorTest) {
-    EXPECT_EQ(
-        operator==(Roman_int(), Roman_int()),
-        true
-    );
-
-    EXPECT_EQ(
-        operator==(Roman_int("XXX"), Roman_int("XXX")),
-        true
-    );
-
-    EXPECT_EQ(
-        operator==(Roman_int("IX"), Roman_int("IX")),
-        true
-    );
-
-    EXPECT_EQ(
-        operator==(Roman_int("XXX"), Roman_int("II")),
-        false
-    );
-
-    EXPECT_EQ(
-        operator==(Roman_int("MCMXLIX"), Roman_int("MCMXLIX")),
-        true
-    );
+TEST(RomanIntTest, EqualToOperatorTest) {
+  EXPECT_EQ(operator==(RomanInt(), RomanInt()), true);
+  EXPECT_EQ(operator==(RomanInt("XXX"), RomanInt("XXX")), true);
+  EXPECT_EQ(operator==(RomanInt("IX"), RomanInt("IX")), true);
+  EXPECT_EQ(operator==(RomanInt("XXX"), RomanInt("II")), false);
+  EXPECT_EQ(operator==(RomanInt("MCMXLIX"), RomanInt("MCMXLIX")), true);
 }
