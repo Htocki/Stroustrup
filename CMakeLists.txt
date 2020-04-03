@@ -28,4 +28,5 @@ add_subdirectory ("lib/namepairs")
 add_subdirectory ("lib/patron")
 add_subdirectory ("lib/rational")
 
+add_subdirectory ("bin/10_3")
 add_subdirectory ("bin/10_1")
