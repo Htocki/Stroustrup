@@ -1,7 +1,6 @@
-## Windows
-.vs
-out
-.vscode
 build
+out
+.vs
+.vscode
 
 
