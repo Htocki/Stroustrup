@@ -29,3 +29,6 @@ add_subdirectory ("lib/patron")
 add_subdirectory ("lib/rational")
 
 add_subdirectory ("bin/10_8")
+add_subdirectory ("bin/10_4")
+add_subdirectory ("bin/10_3")
+add_subdirectory ("bin/10_1")
