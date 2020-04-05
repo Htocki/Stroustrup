@@ -15,26 +15,30 @@ std::ostream& operator<< (std::ostream& os, const Reading& r) {
 
 int GetHour() {
   std::cout << "Input hour [0, 23]: ";
-  if (int hour { -1 }; std::cin >> hour) {
+  int hour { -1 };
+  if (std::cin >> hour) {
     if (hour < 0 || hour > 23) {
       throw std::invalid_argument {
         "The hour you entered is incorrect."
       };
     }
   }
+  return hour;
 }
 
 constexpr double fahrenheit_temperature_minimun { -459.67 };
 
 double GetTemperature() {
   std::cout << "Input temperature: ";
-  if (double temperature { -1000 }; std::cin >> temperature) {
+  double temperature { -1000 };
+  if (std::cin >> temperature) {
     if (temperature < fahrenheit_temperature_minimun) {
       std::invalid_argument {
         "Incorrect temperature entered."
       };
     }
   }
+  return temperature;
 }
 
 Reading InstanceReading() {
