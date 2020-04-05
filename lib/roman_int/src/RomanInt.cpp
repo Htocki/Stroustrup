@@ -9,21 +9,6 @@
 #include <utility>
 
 namespace {
-const std::vector<std::pair<std::string_view, std::int64_t>> values {
-  { "M",  1000 },
-  { "CM", 900 },
-  { "D",  500 },
-  { "CD", 400 },
-  { "C",  100 },
-  { "XC", 90 },
-  { "L",  50 },
-  { "XL", 40 },
-  { "X",  10 },
-  { "IX", 9 },
-  { "V",  5 },
-  { "I",  1 }
-};
-
 // Equivalent roman numbers (hard form, simple form)
 const std::vector<std::pair<std::string_view, std::string_view>>
   equivalents {
@@ -35,7 +20,7 @@ const std::vector<std::pair<std::string_view, std::string_view>>
   { "CM", "DCCCC", }
 };
 
-bool IsRomanInteger(std::string roman) {
+bool IsRomanInteger(const std::string_view roman) {
   // Checks whether all characters of a given string are part
   // of a Roman numeric set.
   const std::string_view roman_numerals_set { "IVXLCDM" };
@@ -71,23 +56,31 @@ bool IsRomanInteger(std::string roman) {
     { "I",  " 1 " }
   };
 
+  // Converting a string containing Roman numerals to a string
+  // containing the corresponding Arabic numbers.
+  // Numbers are separated by spaces.
+  std::string formatted_string { roman.begin(), roman.end() };
+
   for (const auto& pair : pairs) {
-    auto position = roman.find(pair.first);
+    auto position = formatted_string.find(pair.first);
     while (position != std::string::npos) {
-      roman.erase(position, pair.first.length());
-      roman.insert(position, pair.second);
-      position = roman.find(pair.first);
+      formatted_string.erase(position, pair.first.length());
+      formatted_string.insert(position, pair.second);
+      position = formatted_string.find(pair.first);
     }
   }
 
+  // Filling a vector with numbers from a string.
   std::stringstream ss;
-  ss << roman;
+  ss << formatted_string;
   std::vector<std::int64_t> numbers;
   for (std::int64_t number; ss >> number;) {
     numbers.push_back(number);
   }
 
-  for (std::size_t i = 1; i < numbers.size(); ++i) {
+  // Checking the adjacent numbers of a vector for whether
+  // the left one is larger than the right one.
+  for (decltype(numbers.size()) i { 1 }; i < numbers.size(); ++i) {
     if (numbers.at(i-1) < numbers.at(i)) {
       return false;
     }
@@ -97,15 +90,26 @@ bool IsRomanInteger(std::string roman) {
   return true;
 }
 
-std::int64_t ToIntegerNumeral(const std::string_view roman_numeral) {
+std::int64_t ToIntegerNumeral(const char roman_numeral) {
+  const std::vector<std::pair<char, std::int64_t>> values {
+    { 'M',  1000 },
+    { 'D',  500 },
+    { 'C',  100 },
+    { 'L',  50 },
+    { 'X',  10 },
+    { 'V',  5 },
+    { 'I',  1 }
+  };
+
   for (const auto& value : values) {
     if (roman_numeral == value.first) {
       return value.second;
     }
   }
-  // The next line is added so that the compiler does not cry.
-  // The program should not get here. Never...
-  return -1;
+
+  throw std::logic_error {
+    "The invariant is not respected in the class."
+  };
 }
 
 // Removes the subtraction rule.
@@ -133,15 +137,30 @@ std::string ToComplexForm(std::string simple_form) {
 }
 
 std::int64_t ToInteger(std::string roman) {
-  auto simple_form = ToSimpleForm(roman);
+  auto simple_form = ToSimpleForm(std::move(roman));
   std::vector<std::int64_t> integers(simple_form.size());
   for (decltype(integers.size()) i{ 0 }; i < integers.size(); ++i) {
-    integers.at(i) = ToIntegerNumeral(std::string{ simple_form.at(i) });
+    integers.at(i) = ToIntegerNumeral(simple_form.at(i));
   }
   return std::accumulate(integers.begin(), integers.end(), 0);
 }
 
 std::string ToRoman(std::int64_t integer) {
+  const std::vector<std::pair<std::string_view, std::int64_t>> values {
+    { "M",  1000 },
+    { "CM", 900 },
+    { "D",  500 },
+    { "CD", 400 },
+    { "C",  100 },
+    { "XC", 90 },
+    { "L",  50 },
+    { "XL", 40 },
+    { "X",  10 },
+    { "IX", 9 },
+    { "V",  5 },
+    { "I",  1 }
+  };
+
   std::string roman;
   for (const auto value : values) {
     while (integer / value.second) {
@@ -149,12 +168,12 @@ std::string ToRoman(std::int64_t integer) {
       roman += value.first;
     }
   }
-  return ToComplexForm(roman);
+  return ToComplexForm(std::move(roman));
 }
 }  // namespace
 
 RomanInt::RomanInt(std::string roman)
-    : integer_(ToInteger(roman)) {
+    : integer_(ToInteger(std::move(roman))) {
   if (!IsRomanInteger(roman)) {
     throw std::invalid_argument {
       "The indicated value is not a roman number."
@@ -163,22 +182,22 @@ RomanInt::RomanInt(std::string roman)
 }
 
 RomanInt& RomanInt::operator+=(const RomanInt other) {
-  this->integer_ += other.integer_;
+  integer_ += other.integer_;
   return *this;
 }
 
 RomanInt& RomanInt::operator-=(const RomanInt other) {
-  this->integer_ -= other.integer_;
+  integer_ -= other.integer_;
   return *this;
 }
 
 RomanInt& RomanInt::operator*=(const RomanInt other) {
-  this->integer_ *= other.integer_;
+  integer_ *= other.integer_;
   return *this;
 }
 
 RomanInt& RomanInt::operator/=(const RomanInt other) {
-  this->integer_ /= other.integer_;
+  integer_ /= other.integer_;
   return *this;
 }
 
