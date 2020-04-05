@@ -1,5 +1,7 @@
+#include <cstdint>
 #include <exception>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <string>
 
@@ -11,7 +13,23 @@ int main() {
 
     std::ifstream file { fileName };
     if (file.is_open()) {
-      //
+      std::string word;
+      std::cout << "Input word: ";
+      std::getline(std::cin, word);
+
+      std::string string;
+      bool strings_found { false };
+      for (std::int64_t index { 1 }; std::getline(file, string); ++index) {
+        if (string.find(word) != std::string::npos) {
+          std::cout << " [" << index << "] \t"
+            << "\"" << string << "\"" << std::endl;
+          strings_found = true;
+        }
+      }
+      if (!strings_found) {
+        std::cout << "No strings containing the specified"
+          " word were found in the file." << std::endl;
+      }
     } else {
       throw std::invalid_argument {
         "The specified file was not found."
