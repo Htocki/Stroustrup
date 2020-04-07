@@ -1,7 +1,7 @@
+#include <cctype>
 #include <exception>
 #include <iostream>
 #include <fstream>
-#include <cctype>
 
 int main() {
   try {
