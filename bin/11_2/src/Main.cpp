@@ -1,11 +1,9 @@
 #include <cstdint>
 #include <exception>
 #include <fstream>
-#include <iomanip>
 #include <iostream>
 #include <string>
 #include <string_view>
-#include <vector>
 
 bool IsSeparator(const char symbol) {
   const std::string_view separators { " .,!?;:'\"[](){}<>/|\\" };
