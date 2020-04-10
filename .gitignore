@@ -1,6 +1,6 @@
 build
+
+CMakeLists.txt.user
 out
 .vs
 .vscode
-
-

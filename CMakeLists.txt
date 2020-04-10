@@ -33,6 +33,7 @@ add_subdirectory ("lib/money")
 add_subdirectory ("lib/namepairs")
 add_subdirectory ("lib/patron")
 add_subdirectory ("lib/rational")
+add_subdirectory ("lib/roman_int")
 
 add_subdirectory ("bin/10_1")
 add_subdirectory ("bin/10_2")
@@ -41,4 +42,3 @@ add_subdirectory ("bin/10_4")
 add_subdirectory ("bin/10_8")
 add_subdirectory ("bin/10_9")
 add_subdirectory ("bin/10_11")
-
