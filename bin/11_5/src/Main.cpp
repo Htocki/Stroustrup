@@ -1,9 +1,3 @@
-// Напишите программу. считывающую строки и выводящую
-// категории каждого символа в соответствии с правилами,
-// описанными в разделе 11.6. Помните, что один и тот же символ
-// может относиться к разным категориям (например, х - это и
-// буквенный, и буквенно-цифровой символ).
-
 #include <cctype>
 #include <iostream>
 #include <string>
@@ -14,7 +8,13 @@ bool IsInputContinue() {
   std::cin.exceptions(std::ios_base::failbit);
   char answer { ' ' };
   std::cin.get(answer);
-  std::cin.get();
+
+  if (std::cin.get() != '\n') {
+    std::cout << "I consider your answer as negative. "
+        "Input stopped ..." << std::endl;
+    return false;
+  }
+
   switch (answer) {
     case 'y':
       std::cout << "Input continued..." << std::endl;
@@ -24,7 +24,7 @@ bool IsInputContinue() {
       return false;
     default:
       std::cout << "I consider your answer as negative. "
-        "Input stopped ..." << std::endl;
+        "Input stopped..." << std::endl;
       return false;
   }
 }
@@ -34,8 +34,27 @@ int main() {
     do {
       std::cout << "Input string: ";
       std::string string;
+      std::cin.exceptions(std::ios_base::failbit);
       std::getline(std::cin, string);
-      std::cout << string << std::endl;
+      std::cout << "Parsing a string into categories:" << std::endl;
+      for (const auto character : string) {
+        std::string buffer;
+        std::cout << "Character \'" << character << "\' is";
+        if (std::isalnum(character)) { buffer += " alphanumeric,"; }
+        if (std::isalpha(character)) { buffer += " alphabetic,"; }
+        if (std::islower(character)) { buffer += " lowercase,"; }
+        if (std::isupper(character)) { buffer += " an uppercase character,"; }
+        if (std::isdigit(character)) { buffer += " a digit,"; }
+        if (std::isxdigit(character)) { buffer += " a hexadecimal character,"; }
+        if (std::iscntrl(character)) { buffer += " a control character,"; }
+        if (std::isgraph(character)) { buffer += " a graphical character,"; }
+        if (std::isspace(character)) { buffer += " a space character,"; }
+        if (std::isblank(character)) { buffer += " a blank character,"; }
+        if (std::isprint(character)) { buffer += " a printing character,"; }
+        if (std::ispunct(character)) { buffer += " a punctuation character,"; }
+        // Replacing an extra comma with a dot.
+        std::cout << buffer.substr(0, buffer.size() - 1) << '.' << std::endl;
+      }
     } while (IsInputContinue());
   } catch (const std::ios_base::failure& e) {
     std::cout
