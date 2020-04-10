@@ -12,18 +12,14 @@ bool IsSeparator(const char symbol) {
 
 // A word is a set of characters separated from the
 // rest by a set of separator characters.
-bool IsWordFound(const std::string_view word, const std::string_view line) {
-  auto begin = line.find(word);
-  if (begin == std::string_view::npos) {
-    return false;
-  } else {
-    auto end = begin + word.size() - 1;
-    // The case when a word occupies the entire line.
-    if (begin == 0 && end == line.size()) { return true; }
-
-    return IsSeparator(line.at(begin - 1))
-      && IsSeparator(line.at(end + 1));
-  }
+bool IsWordFound(const std::string& word, const std::string& line) {
+  const std::string outlinedLine { ' ' + line + ' ' };
+  auto begin = outlinedLine.find(word);
+  if (begin == std::string_view::npos) { return false; }
+  auto end = begin + word.size() - 1;
+  std::cout << word << "[" << outlinedLine << "]" << std::endl;
+  return IsSeparator(outlinedLine.at(begin - 1))
+    && IsSeparator(outlinedLine.at(end + 1));
 }
 
 int main() {
