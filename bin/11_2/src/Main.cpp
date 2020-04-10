@@ -17,7 +17,6 @@ bool IsWordFound(const std::string& word, const std::string& line) {
   auto begin = outlinedLine.find(word);
   if (begin == std::string_view::npos) { return false; }
   auto end = begin + word.size() - 1;
-  std::cout << word << "[" << outlinedLine << "]" << std::endl;
   return IsSeparator(outlinedLine.at(begin - 1))
     && IsSeparator(outlinedLine.at(end + 1));
 }
