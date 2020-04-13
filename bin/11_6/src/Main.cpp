@@ -78,11 +78,10 @@ int main() {
 
 
     // Replace punctuation with spaces.
-    std::string buf;  // delete
     std::transform(
       buffer.begin(),
       buffer.end(),
-      std::back_inserter(buf),
+      buffer.begin(),
       [] (unsigned char c) -> unsigned char {
         if (IsPunct(c)) { c = ' '; }
         return c;
@@ -90,14 +89,14 @@ int main() {
 
     // Insert previously saved rows at their positions.
     for (const auto& pair : pairs) {  // fix
-      buf.replace(
+      buffer.replace(
         pair.first,
-        pair.first + pair.second.size() - 1,
+        pair.first + pair.second.size(),
         pair.second);
     }
 
     std::ofstream out { "files/Out.txt" };
-    out << std::noskipws << buf;
+    out << std::noskipws << buffer;
   } catch (const std::invalid_argument& e) {
     std::cerr << e.what() << std::endl;
   }
