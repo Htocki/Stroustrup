@@ -29,8 +29,6 @@ int main() {
       };
     }
 
-
-
     in >> std::noskipws;
     std::string buffer;
 
