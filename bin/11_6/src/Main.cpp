@@ -69,14 +69,6 @@ int main() {
       }
     }
 
-    for (const auto& pair : pairs) {
-      std::cout
-        << "[" << pair.first << "]  "
-        << pair.second << '\n';
-    }
-    std::cout << '\n' << std::endl;
-
-
     // Replace punctuation with spaces.
     std::transform(
       buffer.begin(),
@@ -88,11 +80,10 @@ int main() {
       });
 
     // Insert previously saved rows at their positions.
-    for (const auto& pair : pairs) {  // fix
-      buffer.replace(
-        pair.first,
-        pair.first + pair.second.size(),
-        pair.second);
+    for (const auto& pair : pairs) {
+      for (std::size_t i { 0 }; i < pair.second.size(); ++i) {
+         buffer.at(pair.first + i) = pair.second.at(i);
+      }
     }
 
     std::ofstream out { "files/Out.txt" };
