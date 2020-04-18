@@ -3,28 +3,46 @@ cmake_minimum_required (VERSION 3.15)
 project ("Straustrup")
 
 if (CMAKE_COMPILER_IS_GNUCXX)
-    add_definitions(-Wall -pedantic -std=gnu++2a)
-endif()
+  add_definitions (-Wall -pedantic -std=gnu++2a)
+endif ()
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    include(CTest)
-endif()
+  include (CTest)
+endif ()
 
-enable_testing()
+enable_testing ()
 
 include (FetchContent)
 
-FetchContent_Declare(
-    googletest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG        master
+FetchContent_Declare (
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG master
 )
 
-FetchContent_GetProperties(googletest)
+FetchContent_GetProperties (googletest)
 if (NOT googletest_POPULATED)
-    FetchContent_Populate(googletest)
-    add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
-endif()
+  FetchContent_Populate (googletest)
+  add_subdirectory (
+    ${googletest_SOURCE_DIR}
+    ${googletest_BINARY_DIR}
+  )
+endif ()
+
+#FetchContent_Declare (
+#  fltk
+#  GIT_REPOSITORY https://github.com/fltk/fltk.git
+#  GIT_TAG master
+#)
+
+#FetchContent_GetProperties (fltk)
+#if (NOT fltk_POPULATED)
+#  FetchContent_Populate (fltk)
+#  add_subdirectory (
+#    ${fltk_SOURCE_DIR}
+#    ${fltk_BINARY_DIR}
+#  )
+#endif ()
 
 add_subdirectory ("lib/book")
 add_subdirectory ("lib/date")
@@ -43,3 +61,4 @@ add_subdirectory ("bin/10_8")
 add_subdirectory ("bin/10_9")
 add_subdirectory ("bin/10_11")
 add_subdirectory ("bin/11_4")
+add_subdirectory ("bin/12_1")
