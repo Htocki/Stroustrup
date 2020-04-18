@@ -1,9 +1,3 @@
-// Модифицируйте программ из предыдущего упражнения, чтобы
-// она заменяла сокращения don't словами do not, can't -- cannot
-// и т.д.; дефисы внутри слов не трогайте (таким образом,
-// мы получим строку "  do not use the as-if rule"); переведите
-// все символы в нижний регистр.
-
 #include <algorithm>
 #include <cctype>
 #include <exception>
@@ -30,15 +24,46 @@ int main() {
 
     in >> std::noskipws;
     std::string buffer;
-
     std::copy(
       std::istream_iterator<char> (in),
       std::istream_iterator<char> (),
       std::back_inserter(buffer));
 
+    // Convert all characters to lowercase.
+    std::transform(
+      std::begin(buffer),
+      std::end(buffer),
+      std::begin(buffer),
+      [] (unsigned char c) -> unsigned char {
+        return std::tolower(c);
+      });
+
+    // Replace abbreviations with the full form.
+    std::vector<std::pair<std::string, std::string>> forms {
+      { "don't", "do not" },
+      { "can't", "cannot" },
+      { "couldn't", "could not" },
+      { "mustn't", "must not" },
+      { "needn't", "need not" },
+      { "won't", "will not" },
+      { "wouldn't", "would not" },
+      { "shan't", "shall not" },
+      { "shouldn't", "should not" },
+      { "oughtn't", "ought not" },
+      { "hadn't", "had not" },
+    };
+    for (const auto& [contracted_form, long_form] : forms) {
+      while (buffer.find(contracted_form) != std::string::npos) {
+        buffer.replace(
+          buffer.find(contracted_form),
+          contracted_form.size(),
+          long_form);
+      }
+    }
+
     // Saving strings enclosed in double quotes and their
     // starting positions.
-    std::vector<std::pair<std::size_t, std::string>> pairs;
+    std::vector<std::pair<std::size_t, std::string>> substrings;
     {
       bool isReading { false };
       bool isInsertion { false };
@@ -61,7 +86,7 @@ int main() {
         }
 
         if (isInsertion) {
-          pairs.push_back({ position, substring });
+          substrings.push_back({ position, substring });
           isInsertion = false;
           substring.clear();
         }
@@ -78,16 +103,16 @@ int main() {
         return c;
       });
 
-    // Insert previously saved rows at their positions.
-    for (const auto& [position, string] : pairs) {
-      for (std::size_t i { 0 }; i < string.size(); ++i) {
-         buffer.at(position + i) = string.at(i);
-      }
+    // Returns saved substrings to the modified string.
+    for (const auto& [position, substring] : substrings) {
+      buffer.replace(position, substring.size(), substring);
     }
 
     std::ofstream out { "files/Out.txt" };
     out << std::noskipws << buffer;
   } catch (const std::invalid_argument& e) {
+    std::cerr << e.what() << std::endl;
+  } catch (const std::exception& e) {
     std::cerr << e.what() << std::endl;
   }
   return 0;
