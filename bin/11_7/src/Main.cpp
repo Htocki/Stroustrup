@@ -39,7 +39,7 @@ int main() {
       });
 
     // Replace abbreviations with the full form.
-    std::vector<std::pair<std::string, std::string>> forms {
+    const std::vector<std::pair<std::string, std::string>> forms {
       { "don't", "do not" },
       { "can't", "cannot" },
       { "couldn't", "could not" },
@@ -53,11 +53,10 @@ int main() {
       { "hadn't", "had not" },
     };
     for (const auto& [contracted_form, long_form] : forms) {
-      while (buffer.find(contracted_form) != std::string::npos) {
-        buffer.replace(
-          buffer.find(contracted_form),
-          contracted_form.size(),
-          long_form);
+      auto position { buffer.find(contracted_form) };
+      while (position != std::string::npos) {
+        buffer.replace(position, contracted_form.size(), long_form);
+        position = buffer.find(contracted_form, position);
       }
     }
 
@@ -65,29 +64,29 @@ int main() {
     // starting positions.
     std::vector<std::pair<std::size_t, std::string>> substrings;
     {
-      bool isReading { false };
-      bool isInsertion { false };
+      bool is_reading { false };
+      bool is_insertion { false };
       std::size_t position { 0 };
       std::string substring;
 
       for (std::size_t i { 0 }; i < buffer.size(); ++i) {
         if (buffer.at(i) == '\"') {
-          if (isReading) {
-            isReading = false;
-            isInsertion = true;
+          if (is_reading) {
+            is_reading = false;
+            is_insertion = true;
           } else {
-            isReading = true;
+            is_reading = true;
             position = i;
           }
         }
 
-        if (isReading) {
+        if (is_reading) {
           substring += buffer.at(i);
         }
 
-        if (isInsertion) {
+        if (is_insertion) {
           substrings.push_back({ position, substring });
-          isInsertion = false;
+          is_insertion = false;
           substring.clear();
         }
       }
