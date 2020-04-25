@@ -15,12 +15,18 @@
 #include <string_view>
 #include <vector>
 
+template<class T>
+char* AsBytes(T& i) {
+  void* addr = &i;
+  return static_cast<char*>(addr);
+}
+
 bool IsToBinary(const std::string_view& flag) {
-  return flag == "-TB" || flag == "--to-binary";
+  return flag == "-tB" || flag == "--to-binary";
 }
 
 bool IsToTextual(const std::string_view& flag) {
-  return flag == "-TT" || flag == "--to-textual";
+  return flag == "-tT" || flag == "--to-textual";
 }
 
 bool IsFlag(const std::string_view& flag) {
@@ -49,13 +55,16 @@ int main(int argc, char* argv[]) {
           "The specified file was not found."
         };
       }
-      std::ofstream binary { "file.bin", std::ios::binary };
-      textual >> std::noskipws;
-      binary << std::noskipws;
+      std::vector<int> values;
       std::copy(
-        std::istream_iterator<char> { textual },
-        std::istream_iterator<char> { },
-        std::ostream_iterator<std::bitset<sizeof(char)>> { binary });
+        std::istream_iterator<int> { textual },
+        std::istream_iterator<int> { },
+        std::back_inserter(values));
+
+      std::ofstream binary { "file.bin", std::ios::binary };
+      for (auto value : values) {
+        binary.write(AsBytes(value), sizeof(int));
+      }
     }
 
     if (IsToTextual(flag)) {
@@ -65,13 +74,15 @@ int main(int argc, char* argv[]) {
           "The specified file was not found."
         };
       }
+      std::vector<int> values;
+      for (int value { 0 }; binary.read(AsBytes(value), sizeof(int));) {
+        values.push_back(value);
+      }
       std::ofstream textual { "file.txt" };
-      binary >> std::noskipws;
-      textual << std::noskipws;
       std::copy(
-        std::istream_iterator<std::bitset<sizeof(char)>> { binary },
-        std::istream_iterator<std::bitset<sizeof(char)>> { },
-        std::ostream_iterator<char> { textual });
+        std::begin(values),
+        std::end(values),
+        std::ostream_iterator<int> { textual, " " });
     }
   }
   catch (const std::invalid_argument& excaption) {
