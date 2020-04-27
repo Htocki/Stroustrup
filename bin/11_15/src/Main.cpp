@@ -19,15 +19,38 @@ int main() {
     };
   }
 
-  std::vector<int> values;
+  std::vector<double> values;
   std::copy(
-    std::istream_iterator<int> { in },
-    std::istream_iterator<int> { },
+    std::istream_iterator<double> { in },
+    std::istream_iterator<double> { },
     std::back_inserter(values));
 
   std::ofstream out { "files/Out.txt" };
-  for (std::size_t i { 0 }; i < values.size(); ++i) {
+  out << std::scientific << std::setprecision(8);
+
+  // Limit of values per line.
+  constexpr std::size_t limit_per_line { 20 };
+  // Limit of lines per block.
+  constexpr std::size_t limit_per_block { 4 };
+  // Current count of values per line.
+  std::size_t value_count { 0 };
+  // Current count of lines per block.
+  std::size_t line_count { 0 };
+
+  for (const auto value : values) {
+    if (value_count == limit_per_line) {
+      out << '\n';
+      value_count = 0;
+      ++line_count;
+    }
+    if (line_count == limit_per_block) {
+      out << '\n';
+      line_count = 0;
+    }
+    out << std::setw(15) << value  << " ";
+    ++value_count;
   }
+  out << std::endl;
 
   return 0;
 }
