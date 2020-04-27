@@ -2,18 +2,7 @@ cmake_minimum_required (VERSION 3.15)
 
 project ("11_11")
 
-set (HEADERS 
-  "include/HelpFunctions.h"
-  "include/PunctStream.h"
-)
-
-set (SOURCES
-  "src/HelpFunctions.cpp"
-  "src/Main.cpp"
-  "src/PunctStream.cpp"
-)
-
-add_executable (${PROJECT_NAME} ${HEADERS} ${SOURCES})
+add_executable (${PROJECT_NAME} "src/Main.cpp")
 
 set_target_properties (${PROJECT_NAME}
   PROPERTIES
