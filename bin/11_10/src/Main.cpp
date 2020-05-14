@@ -16,7 +16,7 @@ std::vector<std::string> Split(const std::string& string) {
   return substrings;
 }
 
-void Print(const std::vector<std::string> vector) {
+void Print(const std::vector<std::string>& vector) {
   std::copy(
     std::begin(vector),
     std::end(vector),
