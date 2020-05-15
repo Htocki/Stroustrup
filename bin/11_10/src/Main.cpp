@@ -5,7 +5,7 @@
 #include <sstream>
 #include <vector>
 
-std::vector<std::string> Split(const std::string_view& string) {
+std::vector<std::string> Split(std::string_view string) {
   std::stringstream buffer;
   buffer << string;
   std::vector<std::string> substrings;
