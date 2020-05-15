@@ -14,15 +14,15 @@ char* AsBytes(T& i) {
   return static_cast<char*>(addr);
 }
 
-bool IsToBinary(const std::string_view& flag) {
+bool IsToBinary(std::string_view flag) {
   return flag == "-tB" || flag == "--to-binary";
 }
 
-bool IsToTextual(const std::string_view& flag) {
+bool IsToTextual(std::string_view flag) {
   return flag == "-tT" || flag == "--to-textual";
 }
 
-bool IsFlag(const std::string_view& flag) {
+bool IsFlag(std::string_view flag) {
   return IsToBinary(flag) || IsToTextual(flag);
 }
 
