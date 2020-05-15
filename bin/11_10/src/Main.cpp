@@ -1,11 +1,11 @@
 #include <algorithm>
 #include <iostream>
 #include <iterator>
-#include <string>
+#include <string_view>
 #include <sstream>
 #include <vector>
 
-std::vector<std::string> Split(const std::string& string) {
+std::vector<std::string> Split(const std::string_view& string) {
   std::stringstream buffer;
   buffer << string;
   std::vector<std::string> substrings;
@@ -24,7 +24,7 @@ void Print(const std::vector<std::string>& vector) {
 }
 
 int main() {
-  const std::string string {
+  constexpr std::string_view string {
     "The algorithms library defines functions for a variety "
     "of purposes (e.g. searching, sorting, counting, "
     "manipulating) that operate on ranges of elements. Note "
