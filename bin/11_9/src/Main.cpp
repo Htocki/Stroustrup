@@ -48,16 +48,13 @@ int main(int argc, char* argv[]) {
           "The specified file was not found."
         };
       }
-      std::vector<int> values;
-      std::copy(
+      std::ofstream binary { "file.bin", std::ios::binary };
+      std::for_each(
         std::istream_iterator<int> { textual },
         std::istream_iterator<int> { },
-        std::back_inserter(values));
-
-      std::ofstream binary { "file.bin", std::ios::binary };
-      for (auto value : values) {
-        binary.write(AsBytes(value), sizeof(int));
-      }
+        [&binary] (auto value) {
+          binary.write(AsBytes(value), sizeof(int));
+        });
     }
 
     if (IsToTextual(flag)) {
