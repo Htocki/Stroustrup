@@ -14,6 +14,7 @@ enable_testing ()
 
 include (FetchContent)
 
+# google test
 FetchContent_Declare(
   googletest
   GIT_REPOSITORY https://github.com/google/googletest.git
@@ -29,8 +30,31 @@ if (NOT googletest_POPULATED)
   )
 endif ()
 
+# sfml
+set (BUILD_SHARED_LIBS false)
+
+FetchContent_Declare (
+  sfml
+  GIT_REPOSITORY https://github.com/SFML/SFML.git
+  GIT_TAG        master
+)
+
+FetchContent_GetProperties (sfml)
+if (NOT sfml_POPULATED)
+  if (LINK_DEPS_STATIC)
+    set (SFML_STATIC_LIBRARIES CACHE BOOL TRUE)
+  endif ()
+
+  FetchContent_Populate (sfml)
+  add_subdirectory (
+    ${sfml_SOURCE_DIR} 
+    ${sfml_BINARY_DIR}
+  )
+endif ()
+
 add_subdirectory ("lib/book")
 add_subdirectory ("lib/date")
+add_subdirectory ("lib/gui")
 add_subdirectory ("lib/library")
 add_subdirectory ("lib/money")
 add_subdirectory ("lib/namepairs")

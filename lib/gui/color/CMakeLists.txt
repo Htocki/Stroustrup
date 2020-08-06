@@ -1,14 +1,14 @@
 cmake_minimum_required (VERSION 3.15)
 
 set (HEADERS
-  "include/Engine.h"
+  "include/Color.h"
 )
 
 set (SOURCES
-  "src/Engine.cpp"
+  "src/Color.cpp"
 )
 
-project ("engine")
+project ("color")
 
 add_library (${PROJECT_NAME}
   STATIC
@@ -33,9 +33,4 @@ target_include_directories (${PROJECT_NAME}
 target_link_libraries (${PROJECT_NAME} 
   PUBLIC
     sfml-graphics
-    sfml-system
-    sfml-window
-    assets
-    player
-    utility
 )

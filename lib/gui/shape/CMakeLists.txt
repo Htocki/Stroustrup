@@ -1,14 +1,14 @@
 cmake_minimum_required (VERSION 3.15)
 
 set (HEADERS
-  "include/Engine.h"
+  "include/Shape.h"
 )
 
 set (SOURCES
-  "src/Engine.cpp"
+  "src/Shape.cpp"
 )
 
-project ("engine")
+project ("shape")
 
 add_library (${PROJECT_NAME}
   STATIC
@@ -32,10 +32,7 @@ target_include_directories (${PROJECT_NAME}
 
 target_link_libraries (${PROJECT_NAME} 
   PUBLIC
-    sfml-graphics
-    sfml-system
-    sfml-window
-    assets
-    player
-    utility
+    color
+    linestyle
+    point
 )
