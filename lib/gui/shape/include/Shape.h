@@ -4,42 +4,37 @@
 #include <vector>
 
 #include "Color.h"
-#include "Linestyle.h"
 #include "Point.h"
 
+namespace Gui {
 class Shape {
 public:
   void Draw() const;
   virtual void Move(int dx, int dy);
 
-  void Set_color(Color color);
-  Color Color() const;
+  void SetColor(Color color);
+  void SetFillColor(Color color);
 
-  void Set_style(LineStyle line_style);
-  LineStyle Style() const;
+  Color GetColor() const;
+  Point GetPoint(int number) const;
+  int GetPointsCount() const;
 
-  void Set_fill_color(Color color);
-  Color Fill_color() const;
-
-  Point Point(int number) const;
-  int Number_of_points() const;
-
-  // Предотвращение копирования
   Shape(const Shape&) = delete;
   Shape& operator=(const Shape&) = delete;
 
   virtual ~Shape() {}
 
 protected:
-  Shape {};
+  Shape();
   Shape(std::initializer_list<Point> list);
-  virtual void Draw_lines() const;
-  void Add(Point point);
-  void Set_point(int number, Point point);
+  virtual void DrawLines() const;
+  void AddPoint(Point point);
+  void SetPoint(int number, Point point);
 
 private:
   std::vector<Point> _points;
-  Color _line_color;  // Также текста
-  LineStyle _line_style;
-  Color _fill_color { Color::invisible };
+  Color _fill_color;
+  Color _line_color;
+  Color _text_color;
 };
+}  // namespace Gui

@@ -1,18 +1,19 @@
-cmake_minimum_required (VERSION 3.15)
+cmake_minimum_required (VERSION 3.18)
 
 set (HEADERS
-  "include/Point.h"
+  "include/Subject.h"
+  "include/Observer.h"
 )
 
 set (SOURCES
-  "src/Point.cpp"
+  "src/Subject.cpp"
 )
 
-project ("point")
+project ("observer")
 
 add_library (${PROJECT_NAME}
   STATIC
-    ${INCLUDE}
+    ${HEADERS}
     ${SOURCES}
 )
 
@@ -28,4 +29,9 @@ target_include_directories (${PROJECT_NAME}
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+target_link_libraries (${PROJECT_NAME} 
+  PUBLIC
+  sfml-window
 )

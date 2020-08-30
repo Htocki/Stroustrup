@@ -2,7 +2,9 @@
 
 #include <SFML/Graphics/Color.hpp>
 
-struct Color {
+namespace Gui {
+class Color {
+ public:
   enum class Name {
     Red,
     Blue,
@@ -15,23 +17,21 @@ struct Color {
   };
 
   enum class Visibility { 
-    Invisible,
-    Visible
+    Invisible = 0,
+    Visible = 255
   };
   
+  Color();
   Color(Name name);
-  Color(Name name, Visibility visibility);
   Color(Visibility visiblity);
+  Color(Name name, Visibility visibility);
 
-  Name Get_name() const { return _name; }
-  Visibility Get_visibility() const { return _visibility; }
-
-  void Set_visibility(Visibility visibility) {
-    _visibility = visibility;
-  }
+  void Set_color(Name name);
+  void Set_visibility(Visibility visibility);
 
 private:
-  Visibility _visibility = { Visibility::Visible };
-  Name _name = { Name::Black };
-  // sf::Color _sfml_color;
+  Name _name { Name::Black };
+  Visibility _visibility { Visibility::Visible };
+  sf::Color _color;
 };
+}  // namespace Gui

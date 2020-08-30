@@ -1,18 +1,18 @@
-cmake_minimum_required (VERSION 3.15)
+cmake_minimum_required (VERSION 3.18)
 
 set (HEADERS
-  "include/Engine.h"
+  "include/Window.h"
 )
 
 set (SOURCES
-  "src/Engine.cpp"
+  "src/Window.cpp"
 )
 
-project ("engine")
+project ("window")
 
 add_library (${PROJECT_NAME}
   STATIC
-    ${INCLUDE}
+    ${HEADERS}
     ${SOURCES}
 )
 
@@ -33,9 +33,6 @@ target_include_directories (${PROJECT_NAME}
 target_link_libraries (${PROJECT_NAME} 
   PUBLIC
     sfml-graphics
-    sfml-system
     sfml-window
-    assets
-    player
-    utility
+    observer
 )
