@@ -1,9 +1,9 @@
-cmake_minimum_required (VERSION 3.15)
+cmake_minimum_required (VERSION 3.28)
 
-project ("Straustrup")
+project ("Straustrup" LANGUAGES CXX)
 
 if (CMAKE_COMPILER_IS_GNUCXX)
-  add_definitions (-Wall -pedantic -std=gnu++2a)
+  add_definitions (-Wall -pedantic)
 endif ()
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
@@ -17,17 +17,10 @@ include (FetchContent)
 FetchContent_Declare(
   googletest
   GIT_REPOSITORY https://github.com/google/googletest.git
-  GIT_TAG        master
+  GIT_TAG        v1.14.0
 )
 
-FetchContent_GetProperties(googletest)
-if (NOT googletest_POPULATED)
-  FetchContent_Populate(googletest)
-  add_subdirectory (
-    ${googletest_SOURCE_DIR}
-    ${googletest_BINARY_DIR}
-  )
-endif ()
+FetchContent_MakeAvailable(googletest)
 
 add_subdirectory ("lib/book")
 add_subdirectory ("lib/date")

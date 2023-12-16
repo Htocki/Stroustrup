@@ -1,19 +1,13 @@
 
-cmake_minimum_required (VERSION 3.15)
+cmake_minimum_required (VERSION 3.28)
 
 project ("10_3_modified")
 
 add_executable (${PROJECT_NAME} "src/Temp_stats.cpp")
 
-set_target_properties (${PROJECT_NAME}
-	PROPERTIES
-		set (CMAKE_CXX_STANDARD 17)
-		set (CMAKE_CXX_STANDARD_REQUIRED ON)
-	)
+set_property (TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 
-
-file (COPY 
-		"${PROJECT_SOURCE_DIR}/files" 
-	DESTINATION
-		"${PROJECT_BINARY_DIR}"
-	)
+file (
+  COPY "${PROJECT_SOURCE_DIR}/files" 
+  DESTINATION "${PROJECT_BINARY_DIR}"
+)
