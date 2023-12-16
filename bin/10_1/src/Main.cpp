@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <cctype>
+#include <cstdint>
 #include <exception>
 #include <fstream>
 #include <iostream>

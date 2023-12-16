@@ -29,6 +29,7 @@ char GetScale() {
       };
     }
   }
+  return e;
 }
 
 int GetHour() {

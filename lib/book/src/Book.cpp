@@ -90,7 +90,7 @@ bool operator==(const Book& left, const Book& right) {
 }
 
 bool operator!=(const Book& left, const Book& right) {
-	return operator!=(left.isbn(), right.isbn());
+	return !operator==(left.isbn(), right.isbn());
 }
 
 std::istream& operator>>(std::istream& is, Book::Genre& genre) {
