@@ -20,7 +20,13 @@ FetchContent_Declare(
   GIT_TAG        v1.14.0
 )
 
-FetchContent_MakeAvailable(googletest)
+FetchContent_Declare(
+  FLTK
+  GIT_REPOSITORY https://github.com/fltk/fltk.git
+  GIT_TAG        release-1.3.9
+)
+
+FetchContent_MakeAvailable(FLTK googletest)
 
 add_subdirectory ("lib/book")
 add_subdirectory ("lib/date")
@@ -50,3 +56,5 @@ add_subdirectory ("bin/11_12")
 add_subdirectory ("bin/11_13")
 add_subdirectory ("bin/11_14")
 add_subdirectory ("bin/11_15")
+
+add_subdirectory ("fltk-test")
